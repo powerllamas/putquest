@@ -78,6 +78,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.admin',
     'django.contrib.admindocs',
+    'django.contrib.staticfiles',
 
     'south',
     'debug_toolbar',
@@ -90,6 +91,13 @@ INTERNAL_IPS = ('127.0.0.1',)
 DEBUG_TOOLBAR_CONFIG = {
     'INTERCEPT_REDIRECTS': False,
 }
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    ('css','%s/../site_media/css' % PROJECT_ROOT),
+    ('js','%s/../site_media/js' % PROJECT_ROOT),
+)
 
 try:
     from local_settings import *

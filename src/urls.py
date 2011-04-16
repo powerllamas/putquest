@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import *
-
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -12,3 +13,5 @@ urlpatterns = patterns('',
 
     (r'^', include('quest.urls')),
 )
+
+urlpatterns += staticfiles_urlpatterns()
