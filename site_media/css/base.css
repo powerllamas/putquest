@@ -1,3 +1,22 @@
-header {
-    background-color: gray;
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    background: url("/static/img/header_bg.png") repeat-x left bottom #EFE4BD;
+    margin: 0;
+    padding: .3em;
+    padding-bottom: .4em;
+}
+header h1{
+    font-family: 'Buda', serif;
+    font-weight: bold;
+    font-color: 
+    margin: 0;
+    padding: 0 0 0 .2em;
+}
+
+nav li {
+    display: inline;
 }

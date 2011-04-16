@@ -97,6 +97,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     ('css','%s/../site_media/css' % PROJECT_ROOT),
     ('js','%s/../site_media/js' % PROJECT_ROOT),
+    ('img','%s/../site_media/img' % PROJECT_ROOT),
 )
 
 try:
