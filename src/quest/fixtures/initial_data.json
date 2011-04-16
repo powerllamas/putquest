@@ -1,0 +1,32 @@
+[
+  {
+    "pk": 1, 
+    "model": "quest.questionnaire", 
+    "fields": {
+      "owner": 1, 
+      "name": "Ankieta testowa"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "quest.question", 
+    "fields": {
+      "text": "Jak masz na imi\u0119?", 
+      "questionnaire": 1
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "quest.answerset", 
+    "fields": {}
+  }, 
+  {
+    "pk": 1, 
+    "model": "quest.answer", 
+    "fields": {
+      "text": "Krzysztof", 
+      "question": 1, 
+      "answer_set": 1
+    }
+  }
+]

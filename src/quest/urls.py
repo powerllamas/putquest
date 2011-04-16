@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
+from quest.views import IndexView
 
 urlpatterns = patterns('',
-    # Example:
-    # (r'^src/', include('src.foo.urls')),
+    (r'^$', IndexView.as_view()),
 )
