@@ -1,13 +1,17 @@
 body {
     margin: 0;
     padding: 0;
+    background: #EFE4BD;
 }
 
 header{
-    background: url("/static/img/header_bg.png") repeat-x left bottom #EFE4BD;
+    /*background: url("/static/img/header_bg.png") repeat-x left bottom #BAB293;*/
+    background: #BAB293;
     margin: 0;
-    padding: .3em;
     padding-bottom: .4em;
+    float:left;
+    width: 100%;
+    border-bottom: 1px solid #2B2922;
 }
 header h1{
     background: url("/static/img/logo.png") no-repeat;
@@ -17,17 +21,36 @@ header h1{
     margin: 0;
     padding: 0 0 0 40px;
     display: inline;
+    float: left;
 }
 
 nav ul {
-    display: inline;
+    list-style:none;
+    float: left;
+    padding: 0;
+    margin: 0;
+    margin-left: 2em;
 }
 
 nav li {
-    display: inline;
+    float: left;
+    padding: 0;
+    margin: 0;
 }
 
 nav a {
+    padding: 1em;
+    margin-top: 2em;
     text-decoration: none;
     color: #2B2922;
+    border: 1px solid #2B2922;
+    background: #A39770;
+}
+
+nav a:hover {
+    background: #EFE4BD;
+}
+
+nav a.selected {
+    background: #EFE4BD;
 }
