@@ -28,8 +28,7 @@ nav ul {
     list-style:none;
     float: left;
     padding: 0;
-    margin: 0;
-    margin-left: 2em;
+    margin: 0 0 0 2em;
 }
 
 nav li {
@@ -40,7 +39,7 @@ nav li {
 
 nav a {
     padding: 1em;
-    margin-top: 2em;
+    /*margin-top: 2em;*/
     text-decoration: none;
     color: #2B2922;
     border: 1px solid #2B2922;
@@ -48,7 +47,7 @@ nav a {
 }
 
 nav a:hover {
-    background: #EFE4BD;
+    background: #A32500;
 }
 
 nav a.selected {

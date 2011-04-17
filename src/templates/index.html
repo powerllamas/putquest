@@ -6,4 +6,13 @@ Strona główna | {{ block.super }}
 
 {% block content %}
 Hello!
+
+{% if quests %}
+<ul>
+{% for quest in quests %}
+<li> <a href="/questionnaire/{{quest.pk}}">{{ quest.name }} </a></li>
+{% endfor %}
+</ul>
+{% endif %}
+
 {% endblock %}

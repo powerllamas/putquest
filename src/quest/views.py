@@ -5,8 +5,9 @@ from django.shortcuts import get_object_or_404, render_to_response
 
 from quest.models import Questionnaire
 
-class IndexView(TemplateView):
-    template_name = "index.html"
+def index(request):
+    quests = Questionnaire.objects.all()
+    return render_to_response('index.html', {'quests': quests})
 
 def questionnaire(request, quest_id):
     quest = get_object_or_404(Questionnaire, pk=quest_id)

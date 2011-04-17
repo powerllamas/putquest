@@ -95,9 +95,9 @@ DEBUG_TOOLBAR_CONFIG = {
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    ('css','%s/../site_media/css' % PROJECT_ROOT),
-    ('js','%s/../site_media/js' % PROJECT_ROOT),
-    ('img','%s/../site_media/img' % PROJECT_ROOT),
+    ('css','%s/../static/css' % PROJECT_ROOT),
+    ('js','%s/../static/js' % PROJECT_ROOT),
+    ('img','%s/../static/img' % PROJECT_ROOT),
 )
 
 try:
