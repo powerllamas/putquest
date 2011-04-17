@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block title %}
+{{ quest.name }} | {{ block.super }}
+{% endblock %}
+
 {% block content %}
   {{ quest.name }}
 {% endblock %}
