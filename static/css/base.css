@@ -1,55 +1,72 @@
 body {
     margin: 0;
     padding: 0;
+    background: url("/static/img/body_bg.png") #2B2922;
+}
+
+#page {
+	margin: 0 auto 40px;
+	max-width: 988px;
     background: #EFE4BD;
 }
 
-header{
+.header{
     /*background: url("/static/img/header_bg.png") repeat-x left bottom #BAB293;*/
-    background: #BAB293;
+    background: url("/static/img/nav_bottom_line.png") repeat-x bottom left #BAB293;
     margin: 0;
-    padding-bottom: .4em;
+    padding: 0;
     float:left;
     width: 100%;
-    border-bottom: 1px solid #2B2922;
+    /*border-bottom: 1px solid #2B2922;*/
+    /*border: 1px solid #2B2922;*/
 }
-header h1{
+.header h1{
     background: url("/static/img/logo.png") no-repeat;
     font-family: 'Buda', serif;
     font-weight: bold;
     color: #2B2922;
     margin: 0;
-    padding: 0 0 0 40px;
-    display: inline;
-    float: left;
+    padding: 0 .2em 0 40px;
+    min-height: 40px;
+    display: block;
 }
 
-nav ul {
+.content {
+}
+
+.nav {
+    width: 100%;
+}
+
+.nav ul {
     list-style:none;
-    float: left;
-    padding: 0;
-    margin: 0 0 0 2em;
-}
-
-nav li {
-    float: left;
-    padding: 0;
+    float: right;
+    padding: 10px 46px 0 0;
     margin: 0;
 }
 
-nav a {
-    padding: 1em;
-    /*margin-top: 2em;*/
+.nav li {
+    float: left;
+    padding: 0;
+    margin: 0 1px 0 0;
+}
+
+.nav a {
+    display: block;
     text-decoration: none;
     color: #2B2922;
     border: 1px solid #2B2922;
-    background: #A39770;
+    border-bottom: none;
+    background: url("/static/img/tab_top.png") repeat-x top left #A39770;
+    padding: 4px 8px;
+    margin: 0;
+    float: left;
 }
 
-nav a:hover {
-    background: #A32500;
+.nav a:hover {
+    background: url("/static/img/tab_top.png") repeat-x top left #A32500;
 }
 
-nav a.selected {
-    background: #EFE4BD;
+.nav a.selected {
+    background: url("/static/img/tab_top_current.png") repeat-x top left #EFE4BD;
 }
