@@ -1,8 +1,9 @@
+{% load putquest_tags %}
 <!DOCTYPE HTML>
 <html>
 <head>
 	<link href="http://fonts.googleapis.com/css?family=Buda:300" rel="stylesheet" type="text/css" >
-	<link rel="stylesheet" href="/static/css/base.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" type="text/css" media="screen" />
 	<title>
 	{% block title %} putQuest {% endblock %}
 	</title>
@@ -11,9 +12,13 @@
 <body>
 	<div id="page">
 		<div class="header">
-			<h1>putQuest</h1>
+			<h1 class="logo">putQuest</h1>
 			<div class="login">
-				Witaj użytkowniku!
+				{% if user.is_authenticated %}
+					Zalogowano jako <strong>{{ user|format_user }}</strong>.
+				{% else %}
+					Nie zalogowano.
+				{% endif %}
 			</div>
 			<div class="nav">
 			{% block topnav %}
