@@ -62,6 +62,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+#    'middleware.prettify.BeautifulMiddleware',
 )
 
 ROOT_URLCONF = 'src.urls'
@@ -82,6 +83,7 @@ INSTALLED_APPS = (
 
     'south',
     'debug_toolbar',
+    'tabs',
 
     'quest',
 )

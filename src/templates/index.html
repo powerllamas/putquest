@@ -1,4 +1,10 @@
 {% extends 'base.html' %}
+{% load tabs %}
+
+{% block topnav %}
+{% activetab "home" %}
+{{ block.super }}
+{% endblock %}
 
 {% block title %}
 Strona główna | {{ block.super }}

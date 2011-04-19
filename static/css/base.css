@@ -48,7 +48,6 @@ body {
 .nav {
     font-size: 80%;
     width: 100%;
-    clear: both;
 }
 
 .nav ul {
@@ -67,14 +66,14 @@ body {
 .nav a {
     display: block;
     text-decoration: none;
-    color: #2B2922;
+    color: #EFE4BD;
     border: 1px solid #2B2922;
     border-bottom: none;
     background: url("/static/img/tab_top.png") repeat-x top left #A39770;
     padding: 4px 8px 5px 8px;
     margin: 1px 0 1px 0;
     float: left;
-    text-shadow: 0px 1px 1px #BAB293;
+    text-shadow: 0px 1px 1px #2B2922;
 }
 
 .nav a:hover {
