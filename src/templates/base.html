@@ -1,23 +1,28 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<!--  <link href="http://fonts.googleapis.com/css?family=Buda:300" rel="stylesheet" type="text/css" > -->
-  <link rel="stylesheet" href="/static/css/base.css" type="text/css" media="screen" />
-  <title>
-    {% block title %} putQuest {% endblock %}
-  </title>
+	<link href="http://fonts.googleapis.com/css?family=Buda:300" rel="stylesheet" type="text/css" >
+	<link rel="stylesheet" href="/static/css/base.css" type="text/css" media="screen" />
+	<title>
+	{% block title %} putQuest {% endblock %}
+	</title>
 </head>
 
 <body>
 	<div id="page">
 		<div class="header">
 			<h1>putQuest</h1>
+			<div class="login">
+				Witaj użytkowniku!
+			</div>
 			<div class="nav">
 			{% block topnav %}
 			<ul>
 				<li><a class="selected" href="/">Strona główna</a></li>
 				<li><a href="/admin">Panel administracyjny</a></li>
 				<li><a href="">Moje ankiety</a></li>
+				<li><a href="">Konto</a></li>
+				<li><a href="">Dodaj ankietę</a></li>
 			</ul>
 			{% endblock %}
 			</div>
