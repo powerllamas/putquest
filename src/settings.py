@@ -43,7 +43,7 @@ MEDIA_URL = ''
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ''
@@ -100,6 +100,7 @@ STATICFILES_DIRS = (
     ('css','%s/../static/css' % PROJECT_ROOT),
     ('js','%s/../static/js' % PROJECT_ROOT),
     ('img','%s/../static/img' % PROJECT_ROOT),
+    ('admin','%s/../static/admin/media' % PROJECT_ROOT),
 )
 
 try:
