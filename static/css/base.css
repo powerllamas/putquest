@@ -43,6 +43,8 @@ body {
     font-size: 80%;
 	padding: 5px;
 	float: right;
+	width: 50%;
+	text-align: right;
 }
 
 .nav {
