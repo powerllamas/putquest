@@ -64,15 +64,17 @@ body {
     text-decoration: none;
     color: #EFE4BD;
     text-shadow: 1px 1px 3px #2B2922;
-    /*background: #A39770;*/
-    padding: 3px;
+    background: #A39770;
+    padding: 0 3px 2px 3px;
     border-radius: 3px;
     font-weight: bold;
+    margin: 0 4px 0 4px;
 }
 
 .login a:hover {
-    color: #A32500;
-    text-shadow: 1px 1px 1px #2B2922;
+    /*color: #A32500;*/
+    /*text-shadow: 1px 1px 1px #2B2922;*/
+    background: #A32500;
 }
 
 .nav {
