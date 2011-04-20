@@ -34,6 +34,19 @@ body {
     float: left;
 }
 
+.logo {
+	float: left;
+}
+
+.logo a {
+	color: inherit;
+	text-decoration: inherit;
+}
+
+.logo:hover h1{
+	color: #A32500;
+}
+
 .content {
 }
 

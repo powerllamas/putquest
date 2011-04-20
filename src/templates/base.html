@@ -1,5 +1,6 @@
 {% load tabs %}
 {% load putquest_tags %}
+{% load url from future %}
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -13,14 +14,18 @@
 <body>
 	<div id="page">
 		<div class="header">
-			<h1 class="logo">putQuest</h1>
+			<div class="logo"><a href="/"><h1>putQuest</h1></a></div>
+			{% block login %}
 			<div class="login">
 				{% if user.is_authenticated %}
-					Zalogowano jako <strong>{{ user|format_user }}</strong>.
+					Zalogowano jako <strong>{{ user|format_user }}</strong>. 
+					<a href="{% url "django.contrib.auth.views.logout" %}"> Wyloguj </a>
 				{% else %}
 					Nie zalogowano.
+					<a href="{% url "django.contrib.auth.views.login" %}"> Zaloguj </a>
 				{% endif %}
 			</div>
+			{% endblock %}
 			<div class="nav">
 			{% block topnav %}
 			<ul>
