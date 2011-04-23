@@ -67,8 +67,11 @@ body {
     background: #A39770;
     padding: 0 3px 2px 3px;
     border-radius: 3px;
-    font-weight: bold;
     margin: 0 4px 0 4px;
+}
+
+.login a.default {
+    font-weight: bold;
 }
 
 .login a:hover {
@@ -121,4 +124,48 @@ body {
 /*    background: url("/static/img/tab_top_current.png") repeat-x top left #EFE4BD;*/
     background: url("/static/img/tab_top.png") repeat-x top left #EFE4BD;
     text-shadow: 0px 1px 1px #A39770;
+}
+
+.footer {
+    background: #2B2922;
+    border-top: 1px solid #2B2922;
+    text-align: center;
+    font-size: 80%;
+    padding-top: 1em;
+    color: #A39770;
+    text-shadow: -1px -1px 2px #000000;
+}
+
+.footer ul {
+    float: right;
+    display: table-row;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.footer li {
+    display: block;
+    float: left;
+}
+
+.footer p {
+    clear: both;
+    display: block;
+    padding: 0 0 .5em 0;
+    margin: 0;
+}
+
+.footer a {
+    text-decoration: none;
+    display: block;
+    padding: 0;
+    margin: 0 1em;
+    color: #A39770;
+    text-shadow: -1px -1px 2px #000000;
+    margin-bottom: 1px;
+}
+
+.footer a:hover {
+    border-bottom: 1px dotted #A39770;
+    margin-bottom: 0;
 }

@@ -7,10 +7,10 @@
   <div class="login">
     {% if user.is_authenticated %}
       Zalogowano jako <strong>{{ user|format_user }}</strong>. 
-      <a href="{% url "django.contrib.auth.views.logout" %}"> Wyloguj </a>
+      <a href="{% url "logout" %}"> Wyloguj </a>
     {% else %}
       Nie zalogowano.
-      <a href="{% url "django.contrib.auth.views.login" %}"> Zaloguj </a>
+      <a href="{% url "login" %}" class="default"> Zaloguj </a>
       <a href="{% url "register" %}"> Rejestracja</a>
     {% endif %}
   </div>
