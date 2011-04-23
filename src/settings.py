@@ -85,6 +85,7 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'tabs',
 
+    'accounts',
     'quest',
 )
 

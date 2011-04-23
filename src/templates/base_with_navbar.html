@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load tabs %}
+{% load putquest_tags %}
+{% load url from future %}
+
+{% block login %}
+  <div class="login">
+    {% if user.is_authenticated %}
+      Zalogowano jako <strong>{{ user|format_user }}</strong>. 
+      <a href="{% url "django.contrib.auth.views.logout" %}"> Wyloguj </a>
+    {% else %}
+      Nie zalogowano.
+      <a href="{% url "django.contrib.auth.views.login" %}"> Zaloguj </a>
+      <a href="{% url "register" %}"> Rejestracja</a>
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block topnav %}
+  <div class="nav">
+    <ul>
+      <li><a {% ifactivetab "home"%}class="selected" {% endifactivetab %}href="/">Strona główna</a></li>
+      <li><a {% ifactivetab "admin"%}class="selected" {% endifactivetab %} href="/admin">Panel administracyjny</a></li>
+      <li><a {% ifactivetab "my_quests"%}class="selected" {% endifactivetab %} href="">Moje ankiety</a></li>
+      <li><a {% ifactivetab "account"%}class="selected" {% endifactivetab %} href="">Konto</a></li>
+      <li><a {% ifactivetab "add_quest"%}class="selected" {% endifactivetab %} href="">Dodaj ankietę</a></li>
+    </ul>
+  </div>
+{% endblock %}
