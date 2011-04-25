@@ -47,7 +47,77 @@ body {
     color: #A32500;
 }
 
-.content {
+#content {
+    font-size: 80%;
+    clear: both;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    color: #2B2922;
+    text-shadow: 1px 1px 2px #FFFFFF;
+}
+
+#content a {
+    text-decoration: none;
+    color: #2B2922;
+    text-shadow: 1px 1px 2px #FFFFFF;
+    border-bottom: 1px dotted #2B2922;
+}
+
+#content a:hover {
+    color: #A32500;
+    border-bottom: 1px dotted #A32500;
+}
+
+.form_box {
+    margin: 1em auto;
+    max-width: 60%;
+    border: 1px solid #2B2922;
+    box-shadow: 2px 2px 4px #2B2922;
+}
+
+.form_box h3 {
+    background: url("/static/img/tab_top.png") repeat-x top left #A39770;
+    background: #A39770;
+    margin: 0;
+    padding: .5em;
+    text-shadow: 0px 2px 2px #BAB293;
+}
+
+.form_box form {
+    padding-left: 1em;
+}
+
+.form_box p {
+    padding-left: 1em;
+}
+
+.form_box input[type="text"], .form_box input[type="password"] {
+    border: 1px solid #2B2922;
+    padding: .2em;
+}
+
+.form_box .error {
+    padding: .5em;
+    margin: 1em;
+    border-radius: .5em;
+    border 1px dashed #FFFFFF;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 2px #2B2922;
+    background: url("/static/img/error.png") no-repeat 5px 50% #A32500;
+    padding-left: 28px;
+}
+
+.form_box a {
+	font-weight: bold;
+}
+
+.form_box > form + p {
+	text-align: right;
+	margin: 1em;
+}
+
+.form_box label:after{
+	content: ":";
 }
 
 .login {

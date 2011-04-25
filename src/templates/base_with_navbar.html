@@ -10,7 +10,7 @@
       <a href="{% url "logout" %}"> Wyloguj </a>
     {% else %}
       Nie zalogowano.
-      <a href="{% url "login" %}" class="default"> Zaloguj </a>
+      <a href="{% url "login" %}?next={{ request.path }}" class="default"> Zaloguj </a>
       <a href="{% url "register" %}"> Rejestracja</a>
     {% endif %}
   </div>
