@@ -1,5 +1,26 @@
 {% extends "base.html" %}
+{% load url from future %}
+{% load putquest_tags %}
+
+{% block title %}
+Rejestracja | {{ block.super }}
+{% endblock %}
 
 {% block content %}
-rejestracja
+<div class="form_box">
+    <h3>Formularz rejestracji</h3>
+
+    <form method="post" action="{% url "register" %}">
+        {% csrf_token %}
+
+        {% show_form form %}
+
+        <input type="submit" value="Załóż konto" />
+    </form>
+
+    <div class="accounts_links">
+        <p>Masz już konto? <a href="{% url "login" %}">Zaloguj.</a></p>
+        <p>Zapomniałeś hasła? <a href="">Odzyskaj.</a></p>
+    </div>
+</div>
 {% endblock %}

@@ -10,3 +10,7 @@ def format_user(user):
         return "%s %s" % (user.first_name, user.last_name)
     else:
         return user.username
+
+@register.inclusion_tag("form_snippet.html")
+def show_form(form):
+    return {'form': form }

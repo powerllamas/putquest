@@ -1,0 +1,16 @@
+<table>
+  {% for field in form %}
+    {% if field.css_classes %}
+    <tr class="{{ field.css_classes }}">
+    {% else %}
+    <tr>
+    {% endif %}
+      <th>
+        {{ field.label_tag }}{% if field.required %}*{% endif %}:
+      </th> 
+      <td>
+        {{ field }}
+      </td>
+    </tr>
+  {% endfor %}
+</table>
