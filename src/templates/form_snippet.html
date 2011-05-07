@@ -6,10 +6,13 @@
     <tr>
     {% endif %}
       <th>
-        {{ field.label_tag }}{% if field.required %}*{% endif %}:
+          {{ field.label_tag }}
       </th> 
       <td>
         {{ field }}
+      </td>
+      <td>
+        {{ field.errors }}
       </td>
     </tr>
   {% endfor %}
