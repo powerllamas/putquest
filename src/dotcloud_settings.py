@@ -1,6 +1,4 @@
 # Django settings for putquest project.
-import os
-PROJECT_ROOT = os.path.dirname(__file__)
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -75,7 +73,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'src.urls'
 
 TEMPLATE_DIRS = (
-    os.path.join(PROJECT_ROOT, 'templates'),
+        '/home/dotcloud/current/src/templates',
 )
 
 INSTALLED_APPS = (
@@ -102,9 +100,9 @@ INTERNAL_IPS = ('127.0.0.1',)
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    ('css','%s/../static/css' % PROJECT_ROOT),
-    ('js','%s/../static/js' % PROJECT_ROOT),
-    ('img','%s/../static/img' % PROJECT_ROOT),
-    ('admin','%s/../static/admin/media' % PROJECT_ROOT),
+    ('css','/home/dotcloud/current/static/css'),
+    ('js','/home/dotcloud/current/static/js'),
+    ('img','/home/dotcloud/current/static/img'),
+    ('admin','/home/dotcloud/current/static/admin/media'),
 )
 
