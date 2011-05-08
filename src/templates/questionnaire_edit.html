@@ -16,6 +16,7 @@ Nowa ankieta | {{ block.super }}
 {% block content %}
 <div class="quest_edit_base">
     <form method="post" action="">
+        <h3>Ankieta</h3>
         {% csrf_token %}
         {% show_form form %}
         <input type="submit" value="Zapisz" />
@@ -23,6 +24,7 @@ Nowa ankieta | {{ block.super }}
 </div>
 
 <div class="questions_edit">
+    <h3>Lista pytań</h3>
     {% if questions %}
     <ol>
         {% for question in questions %}
@@ -32,6 +34,17 @@ Nowa ankieta | {{ block.super }}
     {% else %}
         <p>Nie dodano jeszcze żadnych pytań.</p>
     {% endif %}
-    <a href="{% url "question_new" quest_id=quest.pk %}">Dodaj pytanie</a>
+    <form method="post" action="{% url "question_new" quest_id=quest.pk %}">
+        {% csrf_token %}
+        <h3>Nowe pytanie</h3>
+        <label for="question_type">Typ pytania</label>
+        <select id="question_type" name="question_type">
+            <option value="none">----</option>
+            <option value="open">Pytanie otwarte</option>
+            <option value="select_single">Pojedynczy wybór</option>
+            <option value="select_multi">Wybór wielokrotny</option>
+        </select>
+        <input type="submit" value="Dodaj pytanie" />
+    </form>
 </div>
 {% endblock %}
