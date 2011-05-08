@@ -13,3 +13,5 @@ class QuestForm(forms.ModelForm):
         model = Questionnaire
         exclude = ['owner',]
 
+class QuestionTypeForm(forms.Form):
+    pass
