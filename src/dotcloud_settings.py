@@ -92,5 +92,7 @@ INSTALLED_APPS = (
     'quest',
 )
 
+STATIC_URL = '/static/'
+
 LOGIN_REDIRECT_URL = '/'
 
