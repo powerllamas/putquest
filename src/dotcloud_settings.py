@@ -39,7 +39,7 @@ MEDIA_URL = ''
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/static/admin/'
+ADMIN_MEDIA_PREFIX = '/admin/media/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ''
@@ -84,7 +84,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.admin',
     'django.contrib.admindocs',
-    'django.contrib.staticfiles',
 
     'south',
     'tabs',
@@ -94,15 +93,4 @@ INSTALLED_APPS = (
 )
 
 LOGIN_REDIRECT_URL = '/'
-
-INTERNAL_IPS = ('127.0.0.1',)
-
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-    ('css','/home/dotcloud/current/static/css'),
-    ('js','/home/dotcloud/current/static/js'),
-    ('img','/home/dotcloud/current/static/img'),
-    ('admin','/home/dotcloud/current/static/admin/media'),
-)
 
