@@ -1,6 +1,7 @@
 import os
 import sys
 os.environ['DJANGO_SETTINGS_MODULE'] = 'src.dotcloud_settings'
+sys.path.append('/home/dotcloud/current/src')
 import django.core.handlers.wsgi
 djangoapplication = django.core.handlers.wsgi.WSGIHandler()
 def application(environ, start_response):
