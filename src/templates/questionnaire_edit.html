@@ -1,0 +1,37 @@
+{% extends 'base_with_navbar.html' %}
+{% load url from future %}
+
+{% load tabs %}
+{% load putquest_tags %}
+
+{% block topnav %}
+{% activetab "add_quest" %}
+{{ block.super }}
+{% endblock %}
+
+{% block title %}
+Nowa ankieta | {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="quest_edit_base">
+    <form method="post" action="">
+        {% csrf_token %}
+        {% show_form form %}
+        <input type="submit" value="Zapisz" />
+    </form>
+</div>
+
+<div class="questions_edit">
+    {% if questions %}
+    <ol>
+        {% for question in questions %}
+        <li><a href="{% url "question_edit" quest_id=quest.pk question_id=question.pk %}">{{ question.title }}</a></li>
+        {% endfor %}
+    </ol>
+    {% else %}
+        <p>Nie dodano jeszcze żadnych pytań.</p>
+    {% endif %}
+    <a href="{% url "question_new" quest_id=quest.pk %}">Dodaj pytanie</a>
+</div>
+{% endblock %}
