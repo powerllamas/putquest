@@ -69,7 +69,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 #    'middleware.prettify.BeautifulMiddleware',
 )
 
@@ -90,7 +89,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'south',
-    'debug_toolbar',
     'tabs',
 
     'accounts',
@@ -100,10 +98,6 @@ INSTALLED_APPS = (
 LOGIN_REDIRECT_URL = '/'
 
 INTERNAL_IPS = ('127.0.0.1',)
-
-DEBUG_TOOLBAR_CONFIG = {
-    'INTERCEPT_REDIRECTS': False,
-}
 
 STATIC_URL = '/static/'
 
