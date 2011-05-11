@@ -35,23 +35,11 @@ Nowa ankieta | {{ block.super }}
         <p>Nie dodano jeszcze żadnych pytań.</p>
     {% endif %}
 
-    {% if question_selection %}
     <form method="post" action="{% url "question_new" quest_id=quest.pk %}">
-        {% csrf_token %}
         <h3>Nowe pytanie</h3>
-        <label for="question_type">Typ pytania</label>
-        <select id="question_type" name="question_type">
-            <option value="none">----</option>
-            {% for question_type in question_selection %}
-            <option value="{{ question_type.0 }}">{{ question_type.1|capfirst }}</option>
-            {% endfor %}
-        </select>
+        {% csrf_token %}
+        {% show_form question_form %}
         <input type="submit" value="Dodaj pytanie" />
     </form>
-    {% else %}
-    <span class="error">
-        Nie można uzyskać listy możliwych typów pytań.
-    </span>
-    {% endif %}
 </div>
 {% endblock %}

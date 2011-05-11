@@ -7,7 +7,7 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 
 from quest.models import Questionnaire, Question
-from quest.forms import QuestForm
+from quest.forms import QuestForm, QuestionTypeForm
 from quest.questions import question_types
 
 def index(request):
@@ -44,12 +44,10 @@ def questionnaire_edit(request, quest_id):
     questions = Question.objects.filter(questionnaire=quest.pk).order_by('number')
     context = RequestContext(request)
 
-    question_selection = []
-    for id, data in question_types.iteritems():
-        question_selection.append((id, data[0]))
+    question_form = QuestionTypeForm()
 
     return render_to_response('questionnaire_edit.html', 
-            {'form': form, 'quest': quest, 'questions': questions, 'question_selection': question_selection, },
+            {'form': form, 'question_form': question_form, 'quest': quest, 'questions': questions, },
             context_instance=context)
 
 #TODO: zamiast sprawdzania, użyć mechanizmu uprawnień
@@ -70,6 +68,8 @@ def question_new(request, quest_id):
         question_data = question_types[question_type]
         if not question_data:
             raise Http404
+
+    raise Http404
 
 
 
