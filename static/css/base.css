@@ -172,6 +172,7 @@ th {
 }
 
 form input[type="submit"] {
+    margin: 1em;
 }
 
 button, input[type="submit"] {

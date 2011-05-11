@@ -14,9 +14,9 @@ Nowa ankieta | {{ block.super }}
 {% endblock %}
 
 {% block content %}
-<div class="quest_edit_base">
+<div class="form_box quest_edit_base">
+    <h3>Ankieta</h3>
     <form method="post" action="">
-        <h3>Ankieta</h3>
         {% csrf_token %}
         {% show_form form %}
         <input type="submit" value="Zapisz" />
