@@ -21,19 +21,14 @@ class Question(models.Model):
     #class Meta:
     #    abstract = True
 
-"""
-class OpenQuestion(Question):
+class QuestionOpen(Question):
     pass
 
-class SingleSelectionQuestion(Question):
+class QuestionSingle(Question):
     pass
 
-class MultiSelectionQuestion(Question):
+class QuestionMulti(Question):
     pass
-
-class NumberQuestion(Question):
-    pass
-"""
 
 class AnswerSet(models.Model):
     finished = models.BooleanField()

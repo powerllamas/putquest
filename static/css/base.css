@@ -96,7 +96,7 @@ body {
 	padding: .2em;
 }
 
-.form_box .error {
+.form_box .error, span.error {
 	padding: .5em;
 	margin: 1em;
 	border-radius: .5em;
