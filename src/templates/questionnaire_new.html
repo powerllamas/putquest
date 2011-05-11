@@ -1,0 +1,25 @@
+{% extends 'base_with_navbar.html' %}
+{% load url from future %}
+
+{% load tabs %}
+{% load putquest_tags %}
+
+{% block topnav %}
+{% activetab "add_quest" %}
+{{ block.super }}
+{% endblock %}
+
+{% block title %}
+Nowa ankieta | {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="quest_edit_base">
+    <form method="post" action="">
+        <h3>Ankieta</h3>
+        {% csrf_token %}
+        {% show_form form %}
+        <input type="submit" value="Zapisz" />
+    </form>
+</div>
+{% endblock %}

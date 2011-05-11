@@ -22,10 +22,22 @@ def questionnaire(request, quest_id):
 
 @login_required
 def questionnaire_new(request):
-    user = request.user
-    quest = Questionnaire(name="Nowa ankieta", owner=user)
-    quest.save()
-    return redirect("questionnaire_edit", quest_id=quest.pk)
+    if request.method == 'POST':
+        form = QuestForm(request.POST)
+        if form.is_valid():
+            quest = form.save()
+            quest.owner = request.user
+            quest.save()
+            return redirect("questionnaire_edit", quest_id=quest.pk)
+    else:
+        user = request.user
+        quest = Questionnaire(owner=user)
+        form = QuestForm(instance=quest)
+
+    context = RequestContext(request)
+    return render_to_response('questionnaire_new.html',
+            {'form': form, },
+            context_instance=context)
 
 @login_required
 def questionnaire_edit(request, quest_id):
