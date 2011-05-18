@@ -4,7 +4,7 @@
 from django import forms
 
 from quest.models import Questionnaire
-from quest.questions import question_types
+from quest.questions import question_choices
 
 class QuestForm(forms.ModelForm):
     error_css_class = 'errors'
@@ -18,8 +18,4 @@ class QuestionTypeForm(forms.Form):
     error_css_class = 'errors'
     required_css_class = 'required'
 
-    choices = []
-    for k,v in question_types.iteritems():
-        choice = (k, v[0])
-        choices.append(choice)
-    question_type = forms.ChoiceField(label="Typ pytania", choices=choices)
+    question_type = forms.ChoiceField(label="Typ pytania", choices=question_choices)

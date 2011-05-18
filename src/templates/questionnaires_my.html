@@ -1,0 +1,30 @@
+{% extends 'base_with_navbar.html' %}
+
+{% load url from future %}
+
+{% load tabs %}
+
+{% block topnav %}
+{% activetab "my_quests" %}
+{{ block.super }}
+{% endblock %}
+
+{% block title %}
+Moje ankiety | {{ block.super }}
+{% endblock%}
+
+{% block content %}
+<div class="quest_list">
+    <h3>Moje ankiety</h3>
+    {% if quests %}
+    <table>
+    {% for quest in quests %}
+    <tr>
+        <td><a href="{% url "questionnaire" quest.pk %}">{{ quest.name }} </a></td>
+        <td><a href="{% url "questionnaire_edit" quest.pk %}" class="action_link"> Edycja </a></td>
+    </tr>
+    {% endfor %}
+    </table>
+    {% endif %}
+</div>
+{% endblock %}

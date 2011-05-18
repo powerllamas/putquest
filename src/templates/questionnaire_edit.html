@@ -39,8 +39,7 @@ Edycja ankiety | {{ block.super }}
 
     <div class="form_box">
         <h3>Nowe pytanie</h3>
-        <form method="post" action="{% url "question_new" quest_id=quest.pk %}">
-            {% csrf_token %}
+        <form method="get" action="{% url "question_new" quest_id=quest.pk %}">
             {% show_form question_form %}
             <input type="submit" value="Dodaj pytanie" />
         </form>

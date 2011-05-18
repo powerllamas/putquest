@@ -3,6 +3,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from quest.questions import question_choices
+
 class Questionnaire(models.Model):
     name = models.CharField(max_length=200, verbose_name=u"nazwa")
     description = models.TextField(blank=True, verbose_name=u"opis")
@@ -18,17 +20,7 @@ class Question(models.Model):
     text = models.TextField()
     questionnaire = models.ForeignKey(Questionnaire)
     number = models.IntegerField()
-    #class Meta:
-    #    abstract = True
-
-class QuestionOpen(Question):
-    pass
-
-class QuestionSingle(Question):
-    pass
-
-class QuestionMulti(Question):
-    pass
+    type = models.CharField(max_length=64, choices=question_choices)
 
 class AnswerSet(models.Model):
     finished = models.BooleanField()
@@ -37,19 +29,3 @@ class Answer(models.Model):
     text = models.TextField()
     question = models.ForeignKey(Question)
     answer_set = models.ForeignKey(AnswerSet)
-    #class Meta:
-    #    abstract = True
-
-"""
-class OpenAnswer(Answer):
-    pass
-
-class SingleSelectionAnswer(Answer):
-    pass
-
-class MultiSelectionAnswer(Answer):
-    pass
-
-class NumberAnswer(Answer):
-    pass
-"""

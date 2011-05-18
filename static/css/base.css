@@ -50,8 +50,7 @@ body {
 #content {
 	font-size: 80%;
 	clear: both;
-	padding-top: 1em;
-	padding-bottom: 1em;
+	padding: 1em;
 	color: #2B2922;
 	text-shadow: 1px 1px 2px #FFFFFF;
 }
@@ -171,6 +170,7 @@ th {
 	background: #A32500;
 }
 
+
 form input[type="submit"] {
     margin: 1em;
 }
@@ -289,4 +289,21 @@ button:disabled, input[type="submit"]:disabled {
 .footer a:hover {
 	border-bottom: 1px dotted #A39770;
 	margin-bottom: 0;
+}
+
+#content a.action_link {
+	text-decoration: none;
+	border: 0px;
+	color: #EFE4BD;
+	text-shadow: 1px 1px 3px #2B2922;
+	background: #A39770;
+	padding: 0 3px 2px 3px;
+	border-radius: 3px;
+	margin: 0 4px 0 4px;
+}
+
+#content a.action_link:hover {
+	/*color: #A32500;*/
+	/*text-shadow: 1px 1px 1px #2B2922;*/
+	background: #A32500;
 }

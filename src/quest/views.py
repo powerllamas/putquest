@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from django.views.generic import TemplateView
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.template import RequestContext
@@ -73,16 +72,20 @@ def question_new(request, quest_id):
     if quest.owner != request.user:
         raise Http404
 
-    if request.method == 'POST':
-        if 'question_type' not in request.POST:
+    if request.method == 'GET':
+        if 'question_type' not in request.GET:
             raise Http404
-        question_type = request.POST['question_type']
+        question_type = request.GET['question_type']
         question_data = question_types[question_type]
         if not question_data:
             raise Http404
 
     raise Http404
 
-
+@login_required
+def questionnaires_my(request):
+    quests = Questionnaire.objects.filter(owner=request.user)
+    context = RequestContext(request)
+    return render_to_response('questionnaires_my.html', {'quests': quests}, context_instance=context)
 
 
