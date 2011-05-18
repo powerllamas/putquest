@@ -3,6 +3,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from quest.questions import question_choices
+
 class Questionnaire(models.Model):
     name = models.CharField(max_length=200, verbose_name=u"nazwa")
     description = models.TextField(blank=True, verbose_name=u"opis")
@@ -14,21 +16,22 @@ class Questionnaire(models.Model):
         return self.name
 
 class Question(models.Model):
-    title = models.CharField(max_length=100)
-    text = models.TextField()
+    title = models.CharField(max_length=100, verbose_name=u"tytuł")
+    text = models.TextField(verbose_name=u"treść pytania")
     questionnaire = models.ForeignKey(Questionnaire)
-    number = models.IntegerField()
-    #class Meta:
-    #    abstract = True
+    number = models.IntegerField(verbose_name=u"kolejność")
+    type = models.CharField(max_length=64, choices=question_choices, verbose_name=u"rodzaj pytania")
 
-class QuestionOpen(Question):
-    pass
+    def __unicode__(self):
+        return self.title
 
-class QuestionSingle(Question):
-    pass
+class QuestionChoice(models.Model):
+    question = models.ForeignKey(Question)
+    name = models.CharField(max_length=200, verbose_name=u"treść wyboru")
+    order = models.IntegerField(verbose_name=u"kolejność")
 
-class QuestionMulti(Question):
-    pass
+    def __unicode__(self):
+        return self.name
 
 class AnswerSet(models.Model):
     finished = models.BooleanField()
@@ -37,19 +40,3 @@ class Answer(models.Model):
     text = models.TextField()
     question = models.ForeignKey(Question)
     answer_set = models.ForeignKey(AnswerSet)
-    #class Meta:
-    #    abstract = True
-
-"""
-class OpenAnswer(Answer):
-    pass
-
-class SingleSelectionAnswer(Answer):
-    pass
-
-class MultiSelectionAnswer(Answer):
-    pass
-
-class NumberAnswer(Answer):
-    pass
-"""

@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from django.views.generic import TemplateView
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 
 from quest.models import Questionnaire, Question
-from quest.forms import QuestForm, QuestionTypeForm
-from quest.questions import question_types
+from quest.forms import QuestForm, QuestionForm, ChoiceFormSet
 
 def index(request):
     quests = Questionnaire.objects.all()
@@ -17,8 +15,9 @@ def index(request):
 
 def questionnaire(request, quest_id):
     quest = get_object_or_404(Questionnaire, pk=quest_id)
+    questions = Question.objects.filter(questionnaire=quest.pk).order_by('number')
     context = RequestContext(request)
-    return render_to_response('questionnaire_view.html', {'quest': quest}, context_instance=context)
+    return render_to_response('questionnaire_view.html', {'quest': quest, 'questions': questions }, context_instance=context)
 
 @login_required
 def questionnaire_new(request):
@@ -56,33 +55,62 @@ def questionnaire_edit(request, quest_id):
     questions = Question.objects.filter(questionnaire=quest.pk).order_by('number')
     context = RequestContext(request)
 
-    question_form = QuestionTypeForm()
-
     return render_to_response('questionnaire_edit.html', 
-            {'form': form, 'question_form': question_form, 'quest': quest, 'questions': questions, },
+            {'form': form, 'quest': quest, 'questions': questions, },
             context_instance=context)
 
-#TODO: zamiast sprawdzania, użyć mechanizmu uprawnień
 @login_required
 def question_edit(request, quest_id, question_id):
-    raise Http404
+    quest = get_object_or_404(Questionnaire, pk=quest_id, owner=request.user)
+    question = get_object_or_404(Question, pk=question_id)
+
+    if request.method == 'POST':
+        form = QuestionForm(request.POST, instance=question)
+        formset = ChoiceFormSet(request.POST, instance=question)
+        if form.is_valid() and formset.is_valid():
+            form.save()
+            formset.save()
+            if 'action:save' in request.POST:
+                return redirect("questionnaire_edit", quest_id=quest.pk)
+            else:
+                return redirect("question_edit", quest_id=quest.pk, question_id=question.pk)
+    else:
+        form = QuestionForm(instance=question)
+        formset = ChoiceFormSet(instance=question)
+
+    context = RequestContext(request)
+    return render_to_response('question_edit.html', 
+            {'form': form, 'formset': formset, 'quest': quest}, context_instance=context)
 
 @login_required
 def question_new(request, quest_id):
-    quest = get_object_or_404(Questionnaire, pk=quest_id)
-    if quest.owner != request.user:
-        raise Http404
+    quest = get_object_or_404(Questionnaire, pk=quest_id, owner=request.user)
+    question = Question()
 
     if request.method == 'POST':
-        if 'question_type' not in request.POST:
-            raise Http404
-        question_type = request.POST['question_type']
-        question_data = question_types[question_type]
-        if not question_data:
-            raise Http404
+        form = QuestionForm(request.POST, instance=question)
+        formset = ChoiceFormSet(request.POST, instance=question)
+        if form.is_valid() and formset.is_valid():
+            question = form.save()
+            question.questionnaire = quest
+            question.save()
+            formset.save()
+            if 'action:save' in request.POST:
+                return redirect("questionnaire_edit", quest_id=quest.pk)
+            else:
+                return redirect("question_edit", quest_id=quest.pk, question_id=question.pk)
+    else:
+        form = QuestionForm(instance=question)
+        formset = ChoiceFormSet(instance=question)
 
-    raise Http404
+    context = RequestContext(request)
+    return render_to_response('question_new.html', 
+            {'form': form, 'formset': formset, 'quest': quest}, context_instance=context)
 
-
+@login_required
+def questionnaires_my(request):
+    quests = Questionnaire.objects.filter(owner=request.user)
+    context = RequestContext(request)
+    return render_to_response('questionnaires_my.html', {'quests': quests}, context_instance=context)
 
 

@@ -2,9 +2,10 @@
 # quest/forms.py
 
 from django import forms
+from django.forms.models import inlineformset_factory
 
-from quest.models import Questionnaire
-from quest.questions import question_types
+from quest.models import Questionnaire, Question, QuestionChoice
+from quest.questions import question_choices
 
 class QuestForm(forms.ModelForm):
     error_css_class = 'errors'
@@ -18,8 +19,22 @@ class QuestionTypeForm(forms.Form):
     error_css_class = 'errors'
     required_css_class = 'required'
 
-    choices = []
-    for k,v in question_types.iteritems():
-        choice = (k, v[0])
-        choices.append(choice)
-    question_type = forms.ChoiceField(label="Typ pytania", choices=choices)
+    question_type = forms.ChoiceField(label="Typ pytania", choices=question_choices)
+
+class QuestionForm(forms.ModelForm):
+    error_css_class = 'errors'
+    required_css_class = 'required'
+
+    class Meta:
+        model = Question
+        exclude = ['questionnaire']
+
+class QuestionChoiceForm(forms.ModelForm):
+    error_css_class = 'errors'
+    required_css_class = 'required'
+
+    class Meta:
+        model = QuestionChoice
+        exclude = ['question']
+
+ChoiceFormSet = inlineformset_factory(Question, QuestionChoice)

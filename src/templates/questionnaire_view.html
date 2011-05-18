@@ -5,5 +5,20 @@
 {% endblock %}
 
 {% block content %}
-  {{ quest.name }}
+<h3>{{ quest.name }}</h3>
+
+{% for question in questions %}
+<dl>
+    <dt>{{ forloop.counter }}. {{ question.title }}</dt>
+    <dd>
+    {{ question.text }}
+        <ul>
+        {% for choice in question.questionchoice_set.all %}
+            <li> {{ choice }} </li>
+        {% endfor %}
+        </ul>
+    </dd>
+
+</dl>
+{% endfor %}
 {% endblock %}
