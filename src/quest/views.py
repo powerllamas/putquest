@@ -55,16 +55,28 @@ def questionnaire_edit(request, quest_id):
     questions = Question.objects.filter(questionnaire=quest.pk).order_by('number')
     context = RequestContext(request)
 
-    question_form = QuestionTypeForm()
-
     return render_to_response('questionnaire_edit.html', 
-            {'form': form, 'question_form': question_form, 'quest': quest, 'questions': questions, },
+            {'form': form, 'quest': quest, 'questions': questions, },
             context_instance=context)
 
-#TODO: zamiast sprawdzania, użyć mechanizmu uprawnień
 @login_required
 def question_edit(request, quest_id, question_id):
-    raise Http404
+    quest = get_object_or_404(Questionnaire, pk=quest_id, owner=request.user)
+    question = get_object_or_404(Question, pk=question_id)
+
+    if request.method == 'POST':
+        form = QuestionForm(request.POST, instance=question)
+        if form.is_valid():
+            question = form.save()
+            question.questionnaire = quest
+            question.save()
+            return redirect("questionnaire_edit", quest_id=quest.pk)
+    else:
+        form = QuestionForm(instance=question)
+
+    context = RequestContext(request)
+    return render_to_response('question_edit.html', 
+            {'form': form, 'quest': quest}, context_instance=context)
 
 @login_required
 def question_new(request, quest_id):
@@ -73,20 +85,18 @@ def question_new(request, quest_id):
         raise Http404
 
     if request.method == 'POST':
-        raise Http404
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            question = form.save()
+            question.questionnaire = quest
+            question.save()
+            return redirect("questionnaire_edit", quest_id=quest.pk)
     else:
-        if 'question_type' not in request.GET:
-            raise Http404
-        question_type = request.GET['question_type']
-        question_data = question_types[question_type]
-        if not question_data:
-            raise Http404
         form = QuestionForm()
-        context = RequestContext(request)
-        return render_to_response('question_new.html', 
-                {'form': form, 'quest': quest}, context_instance=context)
 
-    
+    context = RequestContext(request)
+    return render_to_response('question_new.html', 
+            {'form': form, 'quest': quest}, context_instance=context)
 
 @login_required
 def questionnaires_my(request):

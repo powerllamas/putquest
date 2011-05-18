@@ -16,11 +16,14 @@ class Questionnaire(models.Model):
         return self.name
 
 class Question(models.Model):
-    title = models.CharField(max_length=100)
-    text = models.TextField()
+    title = models.CharField(max_length=100, verbose_name=u"tytuł")
+    text = models.TextField(verbose_name=u"treść pytania")
     questionnaire = models.ForeignKey(Questionnaire)
-    number = models.IntegerField()
-    type = models.CharField(max_length=64, choices=question_choices)
+    number = models.IntegerField(verbose_name=u"kolejność")
+    type = models.CharField(max_length=64, choices=question_choices, verbose_name=u"rodzaj pytania")
+
+    def __unicode__(self):
+        return self.title
 
 class AnswerSet(models.Model):
     finished = models.BooleanField()

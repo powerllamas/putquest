@@ -5,7 +5,7 @@
 {% load putquest_tags %}
 
 {% block topnav %}
-{% activetab "add_quest" %}
+{% activetab "quest_edit" %}
 {{ block.super }}
 {% endblock %}
 
@@ -35,14 +35,8 @@ Edycja ankiety | {{ block.super }}
     {% else %}
         <p>Nie dodano jeszcze żadnych pytań.</p>
     {% endif %}
+    <p><a href="{% url "question_new" quest.pk %}" class="action_link">Dodaj nowe pytanie</a></p>
     </div>
 
-    <div class="form_box">
-        <h3>Nowe pytanie</h3>
-        <form method="get" action="{% url "question_new" quest_id=quest.pk %}">
-            {% show_form question_form %}
-            <input type="submit" value="Dodaj pytanie" />
-        </form>
-    </div>
 </div>
 {% endblock %}
