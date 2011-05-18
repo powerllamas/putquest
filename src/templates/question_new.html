@@ -1,0 +1,25 @@
+{% extends 'base_with_navbar.html' %}
+{% load url from future %}
+
+{% load tabs %}
+{% load putquest_tags %}
+
+{% block topnav %}
+{% activetab "question_new" %}
+{{ block.super }}
+{% endblock %}
+
+{% block title %}
+Nowe pytanie | {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="form_box quest_edit_base">
+    <h3>Nowe pytanie</h3>
+    <form method="post" action="">
+        {% csrf_token %}
+        {% show_form form %}
+        <input type="submit" value="Zapisz" />
+    </form>
+</div>
+{% endblock %}

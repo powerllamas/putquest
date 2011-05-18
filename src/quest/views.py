@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 
 from quest.models import Questionnaire, Question
-from quest.forms import QuestForm, QuestionTypeForm
+from quest.forms import QuestForm, QuestionTypeForm, QuestionForm
 from quest.questions import question_types
 
 def index(request):
@@ -72,15 +72,21 @@ def question_new(request, quest_id):
     if quest.owner != request.user:
         raise Http404
 
-    if request.method == 'GET':
+    if request.method == 'POST':
+        raise Http404
+    else:
         if 'question_type' not in request.GET:
             raise Http404
         question_type = request.GET['question_type']
         question_data = question_types[question_type]
         if not question_data:
             raise Http404
+        form = QuestionForm()
+        context = RequestContext(request)
+        return render_to_response('question_new.html', 
+                {'form': form, 'quest': quest}, context_instance=context)
 
-    raise Http404
+    
 
 @login_required
 def questionnaires_my(request):
