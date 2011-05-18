@@ -44,3 +44,10 @@ class RegisterForm(forms.Form):
         user.save()
 
         return user
+
+class AccountEditForm(forms.ModelForm):
+    error_css_class = 'errors'
+    required_css_class = 'required'
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')

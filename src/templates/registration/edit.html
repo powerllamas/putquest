@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% load putquest_tags %}
+
+{% block title %}
+Edycja konta | {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="form_box">
+    <h3>Edycja konta</h3>
+
+    <form method="post" action="{% url "account_edit" %}">
+        {% csrf_token %}
+
+        {% show_form form %}
+
+        <input type="submit" value="Zapisz zmiany" />
+    </form>
+</div>
+{% endblock %}
