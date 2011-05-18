@@ -1,0 +1,21 @@
+{{ formset.management_form }}
+<table>
+    <tr>
+    {% for field in formset.forms.0 %}
+        {% if not field.is_hidden %}
+            <th>{{field.label}}</th>
+        {% endif %}
+    {% endfor %}
+    </tr>
+    {%for f in formset.forms%}
+        <tr>
+        {%for field in f%} 
+            {% if not field.is_hidden %}
+                <td valign="bottom">{{field}}</td>
+            {%else%}
+                {{field}}
+            {% endif %}
+        {%endfor%}
+        </tr>
+    {%endfor%}
+</table>

@@ -6,8 +6,7 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 
 from quest.models import Questionnaire, Question
-from quest.forms import QuestForm, QuestionTypeForm, QuestionForm
-from quest.questions import question_types
+from quest.forms import QuestForm, QuestionForm, ChoiceFormSet
 
 def index(request):
     quests = Questionnaire.objects.all()
@@ -93,10 +92,11 @@ def question_new(request, quest_id):
             return redirect("questionnaire_edit", quest_id=quest.pk)
     else:
         form = QuestionForm()
+        formset = ChoiceFormSet(instance=quest)
 
     context = RequestContext(request)
     return render_to_response('question_new.html', 
-            {'form': form, 'quest': quest}, context_instance=context)
+            {'form': form, 'formset': formset, 'quest': quest}, context_instance=context)
 
 @login_required
 def questionnaires_my(request):

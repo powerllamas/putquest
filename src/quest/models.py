@@ -25,6 +25,11 @@ class Question(models.Model):
     def __unicode__(self):
         return self.title
 
+class QuestionChoice(models.Model):
+    question = models.ForeignKey(Question)
+    name = models.CharField(max_length=200, verbose_name=u"treść wyboru")
+    order = models.IntegerField(verbose_name=u"kolejność")
+
 class AnswerSet(models.Model):
     finished = models.BooleanField()
 

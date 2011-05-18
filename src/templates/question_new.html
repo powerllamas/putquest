@@ -19,6 +19,7 @@ Nowe pytanie | {{ block.super }}
     <form method="post" action="">
         {% csrf_token %}
         {% show_form form %}
+        {% show_formset formset %}
         <input type="submit" value="Zapisz" />
     </form>
 </div>
