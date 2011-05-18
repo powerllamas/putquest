@@ -65,17 +65,18 @@ def question_edit(request, quest_id, question_id):
 
     if request.method == 'POST':
         form = QuestionForm(request.POST, instance=question)
-        if form.is_valid():
-            question = form.save()
-            question.questionnaire = quest
-            question.save()
+        formset = ChoiceFormSet(request.POST, instance=question)
+        if form.is_valid() and formset.is_valid():
+            form.save()
+            formset.save()
             return redirect("questionnaire_edit", quest_id=quest.pk)
     else:
         form = QuestionForm(instance=question)
+        formset = ChoiceFormSet(instance=question)
 
     context = RequestContext(request)
     return render_to_response('question_edit.html', 
-            {'form': form, 'quest': quest}, context_instance=context)
+            {'form': form, 'formset': formset, 'quest': quest}, context_instance=context)
 
 @login_required
 def question_new(request, quest_id):
@@ -92,11 +93,10 @@ def question_new(request, quest_id):
             return redirect("questionnaire_edit", quest_id=quest.pk)
     else:
         form = QuestionForm()
-        formset = ChoiceFormSet(instance=quest)
 
     context = RequestContext(request)
     return render_to_response('question_new.html', 
-            {'form': form, 'formset': formset, 'quest': quest}, context_instance=context)
+            {'form': form, 'quest': quest}, context_instance=context)
 
 @login_required
 def questionnaires_my(request):
