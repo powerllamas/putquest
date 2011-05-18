@@ -20,7 +20,8 @@ Edycja pytania | {{ block.super }}
         {% csrf_token %}
         {% show_form form %}
         {% show_formset formset %}
-        <input type="submit" value="Zapisz" />
+        <input name="action:save" type="submit" value="Zapisz" />
+        <input name="action:add" type="submit" value="Dodaj nowe wybory" />
     </form>
 </div>
 {% endblock %}

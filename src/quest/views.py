@@ -15,8 +15,9 @@ def index(request):
 
 def questionnaire(request, quest_id):
     quest = get_object_or_404(Questionnaire, pk=quest_id)
+    questions = Question.objects.filter(questionnaire=quest.pk).order_by('number')
     context = RequestContext(request)
-    return render_to_response('questionnaire_view.html', {'quest': quest}, context_instance=context)
+    return render_to_response('questionnaire_view.html', {'quest': quest, 'questions': questions }, context_instance=context)
 
 @login_required
 def questionnaire_new(request):
@@ -69,7 +70,10 @@ def question_edit(request, quest_id, question_id):
         if form.is_valid() and formset.is_valid():
             form.save()
             formset.save()
-            return redirect("questionnaire_edit", quest_id=quest.pk)
+            if 'action:save' in request.POST:
+                return redirect("questionnaire_edit", quest_id=quest.pk)
+            else:
+                return redirect("question_edit", quest_id=quest.pk, question_id=question.pk)
     else:
         form = QuestionForm(instance=question)
         formset = ChoiceFormSet(instance=question)
@@ -80,23 +84,28 @@ def question_edit(request, quest_id, question_id):
 
 @login_required
 def question_new(request, quest_id):
-    quest = get_object_or_404(Questionnaire, pk=quest_id)
-    if quest.owner != request.user:
-        raise Http404
+    quest = get_object_or_404(Questionnaire, pk=quest_id, owner=request.user)
+    question = Question()
 
     if request.method == 'POST':
-        form = QuestionForm(request.POST)
-        if form.is_valid():
+        form = QuestionForm(request.POST, instance=question)
+        formset = ChoiceFormSet(request.POST, instance=question)
+        if form.is_valid() and formset.is_valid():
             question = form.save()
             question.questionnaire = quest
             question.save()
-            return redirect("questionnaire_edit", quest_id=quest.pk)
+            formset.save()
+            if 'action:save' in request.POST:
+                return redirect("questionnaire_edit", quest_id=quest.pk)
+            else:
+                return redirect("question_edit", quest_id=quest.pk, question_id=question.pk)
     else:
-        form = QuestionForm()
+        form = QuestionForm(instance=question)
+        formset = ChoiceFormSet(instance=question)
 
     context = RequestContext(request)
     return render_to_response('question_new.html', 
-            {'form': form, 'quest': quest}, context_instance=context)
+            {'form': form, 'formset': formset, 'quest': quest}, context_instance=context)
 
 @login_required
 def questionnaires_my(request):

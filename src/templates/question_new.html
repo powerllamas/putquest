@@ -19,7 +19,9 @@ Nowe pytanie | {{ block.super }}
     <form method="post" action="">
         {% csrf_token %}
         {% show_form form %}
-        <input type="submit" value="Zapisz" />
+        {% show_formset formset %}
+        <input name="action:save" type="submit" value="Zapisz" />
+        <input name="action:add" type="submit" value="Dodaj nowe wybory" />
     </form>
 </div>
 {% endblock %}

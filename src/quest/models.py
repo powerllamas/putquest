@@ -30,6 +30,9 @@ class QuestionChoice(models.Model):
     name = models.CharField(max_length=200, verbose_name=u"treść wyboru")
     order = models.IntegerField(verbose_name=u"kolejność")
 
+    def __unicode__(self):
+        return self.name
+
 class AnswerSet(models.Model):
     finished = models.BooleanField()
 

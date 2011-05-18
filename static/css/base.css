@@ -292,6 +292,7 @@ button:disabled, input[type="submit"]:disabled {
 }
 
 #content a.action_link {
+  font-weight: bold;
 	text-decoration: none;
 	border: 0px;
 	color: #EFE4BD;

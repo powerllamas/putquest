@@ -25,6 +25,9 @@ Moje ankiety | {{ block.super }}
     </tr>
     {% endfor %}
     </table>
+    {% else %}
+    <p>Nie posiadasz żadnych ankiet.
     {% endif %}
+    <p><a href="{% url "questionnaire_new" %}">Dodaj nową ankietę.</a></p>
 </div>
 {% endblock %}
