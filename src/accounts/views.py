@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 # accounts/views.py
 
 from django.http import HttpResponseRedirect
@@ -24,12 +24,16 @@ def register(request):
 @login_required
 def edit(request):
     user = request.user
+    context = RequestContext(request)
+	
     if request.method == 'POST':
         form = AccountEditForm(request.POST, instance = user)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect("/accounts/edit")
+
+            return HttpResponseRedirect("/accounts/edit?edit_succeded=1")
     else:
         form = AccountEditForm(instance = user)
-    context = RequestContext(request)
-    return render_to_response('registration/edit.html', {'form': form}, context_instance=context)
+        if "edit_succeded" in request.GET:
+            context ['message'] = u"Pomyślnie uaktualniono dane użytkownika!"
+    return render_to_response('registration/account_edit.html', {'form': form}, context_instance=context)

@@ -1,3 +1,4 @@
 *.pyc
 *.pyo
+*.bak
 src/local_settings.py

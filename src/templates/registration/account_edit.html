@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+﻿{% extends "base_with_navbar.html" %}
 {% load url from future %}
 {% load putquest_tags %}
 
@@ -10,10 +10,14 @@ Edycja konta | {{ block.super }}
 <div class="form_box">
     <h3>Edycja konta</h3>
 
+	    {% if message %}
+			<h2>{{ message }}</h2>		
+		{% endif %}
+	
     <form method="post" action="{% url "account_edit" %}">
         {% csrf_token %}
-
-        {% show_form form %}
+		
+		{% show_form form %}
 
         <input type="submit" value="Zapisz zmiany" />
     </form>
