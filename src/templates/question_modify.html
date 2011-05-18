@@ -1,0 +1,18 @@
+{% extends 'base_with_navbar.html' %}
+{% load url from future %}
+
+{% load tabs %}
+{% load putquest_tags %}
+
+{% block content %}
+<div class="form_box quest_edit_base">
+    <h3>{% block form_title %}{% endblock %}</h3>
+    <form method="post" action="">
+        {% csrf_token %}
+        {% show_form form %}
+        {% show_formset formset %}
+        <input name="action:save" type="submit" value="Zapisz" />
+        <input name="action:add" type="submit" value="Dodaj nowe wybory" />
+    </form>
+</div>
+{% endblock %}
