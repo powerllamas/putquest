@@ -22,7 +22,7 @@
       <li><a {% ifactivetab "home"%}class="selected" {% endifactivetab %}href="/">Strona główna</a></li>
       <li><a {% ifactivetab "admin"%}class="selected" {% endifactivetab %} href="/admin">Panel administracyjny</a></li>
       <li><a {% ifactivetab "my_quests"%}class="selected" {% endifactivetab %} href="">Moje ankiety</a></li>
-      <li><a {% ifactivetab "account"%}class="selected" {% endifactivetab %} href="">Konto</a></li>
+      <li><a {% ifactivetab "account"%}class="selected" {% endifactivetab %} href="accounts/edit">Konto</a></li>
       <li><a {% ifactivetab "add_quest"%}class="selected" {% endifactivetab %} href="{% url "questionnaire_new" %}">Dodaj ankietę</a></li>
     </ul>
   </div>
