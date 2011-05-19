@@ -1,2 +1,3 @@
 django
 south
+-e git+https://github.com/django-debug-toolbar/django-debug-toolbar.git#egg=debug_toolbar
