@@ -116,7 +116,20 @@ STATICFILES_DIRS = (
     ('admin','%s/../static/admin/media' % PROJECT_ROOT),
 )
 
+#Email settings seen below should be changed after development phase to use the site server as smtp server.
+#In development phase it is probably also possible to leave dafault settings, but only if your system runs smtp server (Linux does it by default?)
+DEFAULT_FROM_EMAIL = 'put.quest@gmail.com'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'put.quest@gmail.com'
+EMAIL_HOST_PASSWORD = 'projektzai'
+
+
+
+
 try:
     from local_settings import *
 except ImportError, e:
     pass
+
+	

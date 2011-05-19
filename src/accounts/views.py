@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 
 from accounts.forms import RegisterForm
 from accounts.forms import AccountEditForm
@@ -34,6 +35,7 @@ def edit(request):
             return HttpResponseRedirect("/accounts/edit?edit_succeded=1")
     else:
         form = AccountEditForm(instance = user)
+        pass_form = PasswordChangeForm(user=request.user, data=request.POST)
         if "edit_succeded" in request.GET:
-            context ['message'] = u"Pomyślnie uaktualniono dane użytkownika!"
-    return render_to_response('registration/account_edit.html', {'form': form}, context_instance=context)
+            context ['message'] = u"Twoje dane zostały pomyślnie uaktualnione."
+    return render_to_response('registration/account_edit.html', {'form': form, 'pass_form' : pass_form,}, context_instance=context)
