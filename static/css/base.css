@@ -1,4 +1,4 @@
-body {
+﻿body {
 	margin: 0;
 	padding: 0;
 	background: url("/static/img/body_bg.png") #2B2922;
@@ -307,4 +307,8 @@ button:disabled, input[type="submit"]:disabled {
 	/*color: #A32500;*/
 	/*text-shadow: 1px 1px 1px #2B2922;*/
 	background: #A32500;
+}
+
+.success_message{
+	color: #008D00
 }
