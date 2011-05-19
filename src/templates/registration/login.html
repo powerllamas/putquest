@@ -24,7 +24,7 @@ Logowanie | {{ block.super }}
 
 	<div class="accounts_links">
 		<p>Nie masz konta? <a href="{% url "register" %}">Zarejestruj się.</a></p>
-		<p>Zapomniałeś hasła? <a href="">Odzyskaj.</a></p>
+		<p>Zapomniałeś hasła? <a href="{% url "pass_reset" %}">Odzyskaj.</a></p>
 	</div>
 
 </div>
