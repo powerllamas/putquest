@@ -44,5 +44,8 @@ Edycja konta | {{ block.super }}
     
         <input type="submit" value="Zmień hasło" />
     </form>
+    <div class="accounts_links">
+        <p>Zapomniane hasło? <a href="{% url "pass_reset" %}">Odzyskaj.</a></p>
+    </div>
 </div>
 {% endblock %}
