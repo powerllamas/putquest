@@ -122,9 +122,7 @@ DEFAULT_FROM_EMAIL = 'put.quest@gmail.com'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'put.quest@gmail.com'
-EMAIL_HOST_PASSWORD = 'projektzai'
-
-
+#EMAIL_HOST_PASSWORD = 'password is not storred in openly available settings file. You have to set it up in yout local settins file, which is not shared via repo'
 
 
 try:
