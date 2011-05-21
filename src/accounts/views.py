@@ -19,7 +19,7 @@ def register(request):
     else:
         form = RegisterForm()
     context = RequestContext(request)
-    return render_to_response('registration/register.html', {'form': form}, context_instance=context)
+    return render_to_response('accounts/register.html', {'form': form}, context_instance=context)
 
 @login_required
 def edit(request):
@@ -39,4 +39,4 @@ def edit(request):
             context ['password_changed'] = u"Twoje hasło zostało zmienione."
 
     pass_form = PasswordChangeForm(user=request.user)
-    return render_to_response('registration/account_edit.html', {'form': form, 'pass_form' : pass_form,}, context_instance=context)
+    return render_to_response('accounts/account_edit.html', {'form': form, 'pass_form' : pass_form,}, context_instance=context)
