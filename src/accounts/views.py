@@ -33,9 +33,10 @@ def edit(request):
             return HttpResponseRedirect("/accounts/edit?edit_succeded=1")
     else:
         form = AccountEditForm(instance = user)
-        pass_form = PasswordChangeForm(user=request.user)
         if "edit_succeded" in request.GET:
             context ['message'] = u"Twoje dane zostały pomyślnie uaktualnione."
         if "password_changed" in request.GET:
             context ['password_changed'] = u"Twoje hasło zostało zmienione."
+
+    pass_form = PasswordChangeForm(user=request.user)
     return render_to_response('registration/account_edit.html', {'form': form, 'pass_form' : pass_form,}, context_instance=context)
