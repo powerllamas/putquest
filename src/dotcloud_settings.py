@@ -96,3 +96,7 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/'
 
+try:
+    from local_settings import *
+except ImportError, e:
+    pass
