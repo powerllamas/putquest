@@ -3,6 +3,8 @@
 
 from django.conf.urls.defaults import patterns, url
 
+from accounts.forms import PasswordChangeForm
+
 urlpatterns = patterns('',
     url(r'^login/', 'django.contrib.auth.views.login', {}, name='login'),
     url(r'^logout/', 'django.contrib.auth.views.logout', {'next_page': '/',}, name = 'logout'),
@@ -12,6 +14,7 @@ urlpatterns = patterns('',
         {
             'template_name': 'registration/password_change.html',
             'post_change_redirect': '../edit?password_changed=1',
+            'password_change_form': PasswordChangeForm,
         }, name = 'pass_change'),
 	url(r'^pass_changed/', 'django.contrib.auth.views.password_change_done', {}, name = 'pass_changed'),
 	url(r'^pass_reset/', 'django.contrib.auth.views.password_reset', {}, name = 'pass_reset'),

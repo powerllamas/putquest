@@ -5,10 +5,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import PasswordChangeForm
 
 from accounts.forms import RegisterForm
 from accounts.forms import AccountEditForm
+from accounts.forms import PasswordChangeForm
 
 def register(request):
     if request.method == 'POST':
