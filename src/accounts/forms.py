@@ -5,6 +5,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm as AuthPasswordChangeForm
 from django.contrib.auth.forms import SetPasswordForm as AuthSetPasswordForm
+from django.contrib.auth.forms import PasswordResetForm as AuthPasswordResetForm
 
 class RegisterForm(forms.Form):
     error_css_class = 'errors'
@@ -58,5 +59,9 @@ class PasswordChangeForm(AuthPasswordChangeForm):
     required_css_class = 'required'
 
 class SetPasswordForm(AuthSetPasswordForm):
+    error_css_class = 'errors'
+    required_css_class = 'required'
+
+class PasswordResetForm(AuthPasswordResetForm):
     error_css_class = 'errors'
     required_css_class = 'required'
