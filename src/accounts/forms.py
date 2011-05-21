@@ -3,7 +3,6 @@
 
 from django import forms
 from django.contrib.auth.models import User
-from django.core import validators
 
 class RegisterForm(forms.Form):
     error_css_class = 'errors'
@@ -20,7 +19,7 @@ class RegisterForm(forms.Form):
 
     def clean_username(self):
         try:
-            user = User.objects.get(username__iexact=self.cleaned_data['username'])
+            User.objects.get(username__iexact=self.cleaned_data['username'])
         except User.DoesNotExist:
             return self.cleaned_data['username']
         raise forms.ValidationError(u'Nazwa użytkownika jest już zajęta.')

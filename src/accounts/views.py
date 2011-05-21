@@ -4,7 +4,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 
@@ -15,7 +14,7 @@ def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            form.save()
             return HttpResponseRedirect("/accounts/login")
     else:
         form = RegisterForm()
@@ -31,11 +30,12 @@ def edit(request):
         form = AccountEditForm(request.POST, instance = user)
         if form.is_valid():
             form.save()
-
             return HttpResponseRedirect("/accounts/edit?edit_succeded=1")
     else:
         form = AccountEditForm(instance = user)
-        pass_form = PasswordChangeForm(user=request.user, data=request.POST)
+        pass_form = PasswordChangeForm(user=request.user)
         if "edit_succeded" in request.GET:
             context ['message'] = u"Twoje dane zostały pomyślnie uaktualnione."
+        if "password_changed" in request.GET:
+            context ['password_changed'] = u"Twoje hasło zostało zmienione."
     return render_to_response('registration/account_edit.html', {'form': form, 'pass_form' : pass_form,}, context_instance=context)
