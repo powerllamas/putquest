@@ -115,14 +115,12 @@ STATICFILES_DIRS = (
     ('img','%s/../static/img' % PROJECT_ROOT),
     ('admin','%s/../static/admin/media' % PROJECT_ROOT),
 )
-
-#Email settings seen below should be changed after development phase to use the site server as smtp server.
-#In development phase it is probably also possible to leave dafault settings, but only if your system runs smtp server (Linux does it by default?)
-DEFAULT_FROM_EMAIL = 'put.quest@gmail.com'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'put.quest@gmail.com'
-#EMAIL_HOST_PASSWORD = 'password is not storred in openly available settings file. You have to set it up in yout local settins file, which is not shared via repo'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#DEFAULT_FROM_EMAIL = ''
+#EMAIL_HOST = ''
+#EMAIL_PORT = 
+#EMAIL_HOST_USER = ''
+#EMAIL_HOST_PASSWORD = ''
 
 
 try:
