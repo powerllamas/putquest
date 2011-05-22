@@ -1,8 +1,7 @@
-{% extends 'base_with_navbar.html' %}
+{% extends 'quest/questionnaire_modify.html' %}
 {% load url from future %}
 
 {% load tabs %}
-{% load putquest_tags %}
 
 {% block topnav %}
 {% activetab "quest_edit" %}
@@ -13,16 +12,11 @@
 Edycja ankiety | {{ block.super }}
 {% endblock %}
 
-{% block content %}
-<div class="form_box quest_edit_base">
-    <h3>Ankieta</h3>
-    <form method="post" action="">
-        {% csrf_token %}
-        {% show_form form %}
-        <input type="submit" value="Zapisz" />
-    </form>
-</div>
+{% block form_title %}
+Edycja ankiety
+{% endblock %}
 
+{% block questions %}
 <div class="questions_edit">
     <div class="form_box">
     <h3>Lista pytań</h3>
@@ -35,7 +29,7 @@ Edycja ankiety | {{ block.super }}
     {% else %}
         <p>Nie dodano jeszcze żadnych pytań.</p>
     {% endif %}
-    <p><a href="{% url "question_new" quest.pk %}" class="action_link">Dodaj nowe pytanie</a></p>
+    <p><a href="{% url "question_new" quest_id=quest.pk %}" class="action_link">Dodaj nowe pytanie</a></p>
     </div>
 
 </div>

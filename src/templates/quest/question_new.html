@@ -1,18 +1,18 @@
-{% extends 'question_modify.html' %}
+{% extends 'quest/question_modify.html' %}
 {% load url from future %}
 
 {% load tabs %}
 {% load putquest_tags %}
 
 {% block topnav %}
-{% activetab "question_edit" %}
+{% activetab "question_new" %}
 {{ block.super }}
 {% endblock %}
 
 {% block title %}
-Edycja pytania | {{ block.super }}
+Nowe pytanie | {{ block.super }}
 {% endblock %}
 
 {% block form_title %}
-    Edycja pytania
+    Nowe pytanie
 {% endblock %}
