@@ -1,3 +1,5 @@
+{% load putquest_tags %}
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,17 +10,10 @@
     {% if quest.description %}
     <p>{{ quest.description }}</p>
     {% endif %}
-    {% for question in quest.question_set.all %}
+    {% for question, form in question_parts %}
       <h2>{{ forloop.counter }}. {{ question.title|capfirst }}</h2>
       <p>{{ question.text }}</p>
-      {{ question.get_form }}
-      {% with choices=question.questionchoice_set.all %}
-      <ul>
-        {% for choice in choices %}
-            <li> {{ choice }} </li>
-        {% endfor %}
-      </ul>
-      {% endwith %}
+      {% show_form form %}
     {% endfor %}
   </body>
 </html>

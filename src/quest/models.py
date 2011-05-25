@@ -34,16 +34,16 @@ class Question(models.Model):
         verbose_name = u"pytanie"
         verbose_name_plural = u"pytania"
 
-    def get_form(self):
+    def get_form_class(self):
         if self.type == 'open':
             from quest.forms import AnswerOpenForm
-            return AnswerOpenForm()
+            return AnswerOpenForm
         if self.type == 'single_selection':
             from quest.forms import AnswerSingleForm
-            return AnswerSingleForm()
+            return AnswerSingleForm
         if self.type == 'multi_selection':
             from quest.forms import AnswerMultiForm
-            return AnswerMultiForm()
+            return AnswerMultiForm
 
 class QuestionChoice(models.Model):
     question = models.ForeignKey(Question)

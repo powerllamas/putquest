@@ -85,5 +85,14 @@ def questionnaire_fill(request, quest_id):
     quest = get_object_or_404(Questionnaire, pk=quest_id)
     answer_set = get_object_or_None(AnswerSet, user=request.user)
 
+    questions = Question.objects.filter(questionnaire=quest.pk).order_by('number')
+    question_parts = []
+    for question in questions:
+        Form = question.get_form_class()
+        form_part = Form(prefix=('question_%s' % question.pk))
+        question_parts.append((question, form_part))
+
     context = RequestContext(request)
-    return render_to_response('quest/questionnaire_fill.html', {'quest': quest}, context_instance=context)
+    return render_to_response('quest/questionnaire_fill.html', 
+            {'quest': quest, 'question_parts': question_parts }, 
+            context_instance=context)
