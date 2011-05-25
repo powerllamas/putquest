@@ -35,8 +35,9 @@ class QuestionChoice(models.Model):
 
 class AnswerSet(models.Model):
     finished = models.BooleanField()
+    questionnaire = models.ForeignKey(Questionnaire)
 
 class Answer(models.Model):
     text = models.TextField()
-    question = models.ForeignKey(Question)
     answer_set = models.ForeignKey(AnswerSet)
+    question = models.ForeignKey(Question)
