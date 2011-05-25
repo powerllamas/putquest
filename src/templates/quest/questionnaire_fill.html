@@ -1,0 +1,19 @@
+{% load putquest_tags %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ quest.name }}</title>
+  </head>
+  <body>
+    <h1>{{ quest.name }}</h1>
+    {% if quest.description %}
+    <p>{{ quest.description }}</p>
+    {% endif %}
+    {% for question, form in question_parts %}
+      <h2>{{ forloop.counter }}. {{ question.title|capfirst }}</h2>
+      <p>{{ question.text }}</p>
+      {% show_form form %}
+    {% endfor %}
+  </body>
+</html>

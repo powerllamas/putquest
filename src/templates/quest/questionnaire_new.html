@@ -1,0 +1,16 @@
+{% extends 'quest/questionnaire_modify.html' %}
+
+{% load tabs %}
+
+{% block topnav %}
+{% activetab "add_quest" %}
+{{ block.super }}
+{% endblock %}
+
+{% block title %}
+Nowa ankieta | {{ block.super }}
+{% endblock %}
+
+{% block form_title %}
+Nowa ankieta
+{% endblock %}

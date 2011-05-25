@@ -11,9 +11,14 @@ class Questionnaire(models.Model):
     owner = models.ForeignKey(User, verbose_name=u"właściciel")
     public = models.BooleanField(verbose_name=u"publiczna")
     published = models.BooleanField(verbose_name=u"opublikowana")
+    active = models.BooleanField(verbose_name=u"aktywna", default=True)
 
     def __unicode__(self):
         return self.name
+
+    class Meta:
+        verbose_name = u"ankieta"
+        verbose_name_plural = u"ankiety"
 
 class Question(models.Model):
     title = models.CharField(max_length=100, verbose_name=u"tytuł")
@@ -25,6 +30,21 @@ class Question(models.Model):
     def __unicode__(self):
         return self.title
 
+    class Meta:
+        verbose_name = u"pytanie"
+        verbose_name_plural = u"pytania"
+
+    def get_form_class(self):
+        if self.type == 'open':
+            from quest.forms import AnswerOpenForm
+            return AnswerOpenForm
+        if self.type == 'single_selection':
+            from quest.forms import AnswerSingleForm
+            return AnswerSingleForm
+        if self.type == 'multi_selection':
+            from quest.forms import AnswerMultiForm
+            return AnswerMultiForm
+
 class QuestionChoice(models.Model):
     question = models.ForeignKey(Question)
     name = models.CharField(max_length=200, verbose_name=u"treść wyboru")
@@ -33,11 +53,31 @@ class QuestionChoice(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        verbose_name = u"wybór"
+        verbose_name_plural = u"wybory"
+
 class AnswerSet(models.Model):
-    finished = models.BooleanField()
+    finished = models.BooleanField(verbose_name=u'zakończono')
+    user = models.ForeignKey(User, blank=True, null=True, verbose_name=u"wypełniająca/y")
     questionnaire = models.ForeignKey(Questionnaire)
+
+    def __unicode__(self):
+        return u"Ankieta '%s' wypełniona przez '%s'"
+
+    class Meta:
+        verbose_name = u"Wypełniona ankieta"
+        verbose_name_plural = u"Wypełnione ankiety"
+
 
 class Answer(models.Model):
     text = models.TextField()
     answer_set = models.ForeignKey(AnswerSet)
     question = models.ForeignKey(Question)
+
+    def __unicode__(self):
+        return u"Odpowiedź na pytanie '%s'" % self.question
+
+    class Meta:
+        verbose_name = u"odpowiedź"
+        verbose_name_plural = u"odpowiedzi"

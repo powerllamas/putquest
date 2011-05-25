@@ -3,7 +3,9 @@
 
 from django import forms
 from django.contrib.auth.models import User
-from django.core import validators
+from django.contrib.auth.forms import PasswordChangeForm as AuthPasswordChangeForm
+from django.contrib.auth.forms import SetPasswordForm as AuthSetPasswordForm
+from django.contrib.auth.forms import PasswordResetForm as AuthPasswordResetForm
 
 class RegisterForm(forms.Form):
     error_css_class = 'errors'
@@ -20,7 +22,7 @@ class RegisterForm(forms.Form):
 
     def clean_username(self):
         try:
-            user = User.objects.get(username__iexact=self.cleaned_data['username'])
+            User.objects.get(username__iexact=self.cleaned_data['username'])
         except User.DoesNotExist:
             return self.cleaned_data['username']
         raise forms.ValidationError(u'Nazwa użytkownika jest już zajęta.')
@@ -51,3 +53,15 @@ class AccountEditForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'email')
+
+class PasswordChangeForm(AuthPasswordChangeForm):
+    error_css_class = 'errors'
+    required_css_class = 'required'
+
+class SetPasswordForm(AuthSetPasswordForm):
+    error_css_class = 'errors'
+    required_css_class = 'required'
+
+class PasswordResetForm(AuthPasswordResetForm):
+    error_css_class = 'errors'
+    required_css_class = 'required'

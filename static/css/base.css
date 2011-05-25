@@ -309,6 +309,7 @@ button:disabled, input[type="submit"]:disabled {
 	background: #A32500;
 }
 
-.success_message{
-	color: #008D00
+.form_box .success_message{
+	color: #008D00;
+	padding-left: 1em;
 }

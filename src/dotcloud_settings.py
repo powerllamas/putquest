@@ -96,3 +96,9 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/'
 
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+
+try:
+    from local_settings import *
+except ImportError, e:
+    pass

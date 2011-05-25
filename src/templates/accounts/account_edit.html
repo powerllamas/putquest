@@ -1,0 +1,51 @@
+﻿{% extends "base_with_navbar.html" %}
+{% load url from future %}
+
+{% load tabs %}
+{% load putquest_tags %}
+
+{% block topnav %}
+{% activetab "account" %}
+{{ block.super }}
+{% endblock %}
+
+{% block title %}
+Edycja konta | {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="form_box">
+    <h3>Edycja konta</h3>
+
+    {% if message %}
+        <h4 class="success_message">{{ message }}</h4>		
+    {% endif %}
+	
+    <form method="post" action="{% url "account_edit" %}">
+        {% csrf_token %}
+		
+		{% show_form form %}
+		
+        <input type="submit" value="Zapisz zmiany" />
+    </form>
+</div>
+
+<div class="form_box">
+    <h3>Zmiana hasła</h3>
+
+    {% if password_changed %}
+    <h4 class="success_message">{{ password_changed }}</h4>		
+    {% endif %}
+
+    <form method="post" action="{% url "pass_change" %}">
+        {% csrf_token %}
+
+        {% show_form pass_form %}
+    
+        <input type="submit" value="Zmień hasło" />
+    </form>
+    <div class="accounts_links">
+        <p>Zapomniane hasło? <a href="{% url "pass_reset" %}">Odzyskaj.</a></p>
+    </div>
+</div>
+{% endblock %}
