@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ quest.name }}</title>
+  </head>
+  <body>
+    <h1>{{ quest.name }}</h1>
+    {% if quest.description %}
+    <p>{{ quest.description }}</p>
+    {% endif %}
+    {% for question in quest.question_set.all %}
+      <h2>{{ forloop.counter }}. {{ question.title|capfirst }}</h2>
+      <p>{{ question.text }}</p>
+      {% with choices=question.questionchoice_set.all %}
+      <ul>
+        {% for choice in choices %}
+            <li> {{ choice }} </li>
+        {% endfor %}
+      </ul>
+      {% endwith %}
+    {% endfor %}
+  </body>
+</html>

@@ -14,7 +14,7 @@
     {{ question.text }}
         <ul>
         {% for choice in question.questionchoice_set.all %}
-            <li> {{ choice }} </li>
+            <li> {{ choice.name }} </li>
         {% endfor %}
         </ul>
     </dd>

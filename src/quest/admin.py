@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from django import forms
 from quest.models import Questionnaire, Question, AnswerSet, Answer, QuestionChoice
 
-class QuestionInline(admin.TabularInline):
+class QuestionInline(admin.StackedInline):
     model = Question
 
 class QuestionnaireAdmin(admin.ModelAdmin):
-    inlines = [
-        QuestionInline,
-    ]
+#    inlines = [
+#        QuestionInline,
+#    ]
+    list_display = ['name', 'owner', 'public', 'published', 'active',]
 
 # class AnswerInlineForm(forms.ModelForm):
     # def __init__(self, *args, **kwargs):

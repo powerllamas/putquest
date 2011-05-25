@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from django.http import Http404
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 
-from quest.models import Questionnaire, Question
+from annoying.functions import get_object_or_None
+
+from quest.models import Questionnaire, Question, AnswerSet
 from quest.forms import QuestForm, QuestionForm, ChoiceFormSet
 
 def index(request):
@@ -80,4 +81,9 @@ def questionnaires_my(request):
     context = RequestContext(request)
     return render_to_response('quest/questionnaires_my.html', {'quests': quests}, context_instance=context)
 
+def questionnaire_fill(request, quest_id):
+    quest = get_object_or_404(Questionnaire, pk=quest_id)
+    answer_set = get_object_or_None(AnswerSet, user=request.user)
 
+    context = RequestContext(request)
+    return render_to_response('quest/questionnaire_fill.html', {'quest': quest}, context_instance=context)

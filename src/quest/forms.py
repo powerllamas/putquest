@@ -13,7 +13,7 @@ class QuestForm(forms.ModelForm):
 
     class Meta:
         model = Questionnaire
-        exclude = ['owner',]
+        exclude = ['owner', 'active']
 
 class QuestionTypeForm(forms.Form):
     error_css_class = 'errors'

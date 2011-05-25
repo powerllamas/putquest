@@ -1,3 +1,4 @@
 django
 south
 django-debug-toolbar
+django-annoying

@@ -6,6 +6,8 @@ urlpatterns = patterns('',
     url(r'^$', 'quest.views.index', name='index'),
     url(r'^my_questionnaires$', 'quest.views.questionnaires_my', name='my_questionnaires'),
 
+    url(r'^(?P<quest_id>\d+)/$', 'quest.views.questionnaire_fill', name='questionnaire_fill'),
+
     url(r'^questionnaire/new/$', 'quest.views.questionnaire_modify',
         {
             'template': 'quest/questionnaire_new.html',

@@ -11,9 +11,14 @@ class Questionnaire(models.Model):
     owner = models.ForeignKey(User, verbose_name=u"właściciel")
     public = models.BooleanField(verbose_name=u"publiczna")
     published = models.BooleanField(verbose_name=u"opublikowana")
+    active = models.BooleanField(verbose_name=u"aktywna", default=True)
 
     def __unicode__(self):
         return self.name
+
+    class Meta:
+        verbose_name = u"ankieta"
+        verbose_name_plural = u"ankiety"
 
 class Question(models.Model):
     title = models.CharField(max_length=100, verbose_name=u"tytuł")
@@ -25,6 +30,10 @@ class Question(models.Model):
     def __unicode__(self):
         return self.title
 
+    class Meta:
+        verbose_name = u"pytanie"
+        verbose_name_plural = u"pytania"
+
 class QuestionChoice(models.Model):
     question = models.ForeignKey(Question)
     name = models.CharField(max_length=200, verbose_name=u"treść wyboru")
@@ -33,10 +42,29 @@ class QuestionChoice(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        verbose_name = u"wybór"
+        verbose_name_plural = u"wybory"
+
 class AnswerSet(models.Model):
-    finished = models.BooleanField()
+    finished = models.BooleanField(verbose_name=u'zakończono')
+    user = models.ForeignKey(User, blank=True, null=True, verbose_name=u"wypełniająca/y")
+
+    def __unicode__(self):
+        return u"Ankieta '%s' wypełniona przez '%s'"
+
+    class Meta:
+        verbose_name = u"Wypełniona ankieta"
+        verbose_name_plural = u"Wypełnione ankiety"
 
 class Answer(models.Model):
     text = models.TextField()
     question = models.ForeignKey(Question)
     answer_set = models.ForeignKey(AnswerSet)
+
+    def __unicode__(self):
+        return u"Odpowiedź na pytanie '%s'" % self.question
+
+    class Meta:
+        verbose_name = u"odpowiedź"
+        verbose_name_plural = u"odpowiedzi"
