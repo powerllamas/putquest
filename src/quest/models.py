@@ -52,6 +52,7 @@ class QuestionChoice(models.Model):
 class AnswerSet(models.Model):
     finished = models.BooleanField(verbose_name=u'zakończono')
     user = models.ForeignKey(User, blank=True, null=True, verbose_name=u"wypełniająca/y")
+    questionnaire = models.ForeignKey(Questionnaire)
 
     def __unicode__(self):
         return u"Ankieta '%s' wypełniona przez '%s'"
@@ -60,10 +61,11 @@ class AnswerSet(models.Model):
         verbose_name = u"Wypełniona ankieta"
         verbose_name_plural = u"Wypełnione ankiety"
 
+
 class Answer(models.Model):
     text = models.TextField()
-    question = models.ForeignKey(Question)
     answer_set = models.ForeignKey(AnswerSet)
+    question = models.ForeignKey(Question)
 
     def __unicode__(self):
         return u"Odpowiedź na pytanie '%s'" % self.question
