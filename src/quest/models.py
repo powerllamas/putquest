@@ -3,7 +3,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from quest.questions import question_choices
+from quest.questions import question_choices, question_types
 
 class Questionnaire(models.Model):
     name = models.CharField(max_length=200, verbose_name=u"nazwa")
@@ -35,15 +35,7 @@ class Question(models.Model):
         verbose_name_plural = u"pytania"
 
     def get_form_class(self):
-        if self.type == 'open':
-            from quest.forms import AnswerOpenForm
-            return AnswerOpenForm
-        if self.type == 'single_selection':
-            from quest.forms import AnswerSingleForm
-            return AnswerSingleForm
-        if self.type == 'multi_selection':
-            from quest.forms import AnswerMultiForm
-            return AnswerMultiForm
+        return question_types[self.type].form
 
 class QuestionChoice(models.Model):
     question = models.ForeignKey(Question)
