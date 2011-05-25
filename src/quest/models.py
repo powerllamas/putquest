@@ -34,6 +34,17 @@ class Question(models.Model):
         verbose_name = u"pytanie"
         verbose_name_plural = u"pytania"
 
+    def get_form(self):
+        if self.type == 'open':
+            from quest.forms import AnswerOpenForm
+            return AnswerOpenForm()
+        if self.type == 'single_selection':
+            from quest.forms import AnswerSingleForm
+            return AnswerSingleForm()
+        if self.type == 'multi_selection':
+            from quest.forms import AnswerMultiForm
+            return AnswerMultiForm()
+
 class QuestionChoice(models.Model):
     question = models.ForeignKey(Question)
     name = models.CharField(max_length=200, verbose_name=u"treść wyboru")

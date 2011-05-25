@@ -11,6 +11,7 @@
     {% for question in quest.question_set.all %}
       <h2>{{ forloop.counter }}. {{ question.title|capfirst }}</h2>
       <p>{{ question.text }}</p>
+      {{ question.get_form }}
       {% with choices=question.questionchoice_set.all %}
       <ul>
         {% for choice in choices %}
