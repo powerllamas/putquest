@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #EFE4BD;
+  font-family: 'OFL Sorts Mill Goudy TT', serif;
+}
+
+h1 {
+  /*font-family: 'Buda', serif;*/
+  font-family: 'OFL Sorts Mill Goudy TT', serif;
+  color: #EFE4BD;
+  background-color: #2B2922;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: .5em;
+  text-shadow: 0px 1px 1px #000;
+}
+
+.header {
+  background-color: #A39770;
+}
+
+.header p {
+  background-color: #A39770;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: .5em;
+	text-shadow: 1px 1px 1px #EFE4BD;
+  max-width: 800px;
+}
+
+div.question {
+  padding: .5em;
+  margin-top: 0;
+  margin-bottom: 0;
+  border-bottom: 1px dotted #A39770;
+}
+/*
+#A39770;
+#A32500;
+#BAB293;
+*/

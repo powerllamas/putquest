@@ -94,6 +94,7 @@ INSTALLED_APPS = (
     'south',
     'debug_toolbar',
     'tabs',
+    'pluralize_pl',
 
     'accounts',
     'quest',

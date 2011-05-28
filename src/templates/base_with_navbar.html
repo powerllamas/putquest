@@ -17,6 +17,7 @@
 {% endblock %}
 
 {% block topnav %}
+  {% if user.is_authenticated %}
   <div class="nav">
     <ul>
       <li><a {% ifactivetab "home"%}class="selected" {% endifactivetab %}href="/">Strona główna</a></li>
@@ -28,4 +29,5 @@
       {% endif %}
     </ul>
   </div>
+  {% endif %}
 {% endblock %}

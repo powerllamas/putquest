@@ -1,19 +1,33 @@
+{% load pluralize_pl %}
 {% load putquest_tags %}
 
 <!DOCTYPE html>
 <html>
   <head>
     <title>{{ quest.name }}</title>
+    <link  href="http://fonts.googleapis.com/css?family=OFL+Sorts+Mill+Goudy+TT:regular,italic" rel="stylesheet" type="text/css" >
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/form.css" type="text/css" media="screen" />
   </head>
   <body>
+    <div class="header">
     <h1>{{ quest.name }}</h1>
     {% if quest.description %}
     <p>{{ quest.description }}</p>
     {% endif %}
-    {% for question, form in question_parts %}
-      <h2>{{ forloop.counter }}. {{ question.title|capfirst }}</h2>
-      <p>{{ question.text }}</p>
-      {% show_form form %}
-    {% endfor %}
+    {% with qcount=question_parts|length %}
+    <p>Ankieta zawiera {{ qcount }} {{ qcount|pluralize_pl:"pytanie,pytań,pytania" }}.</p>
+    {% endwith %}
+    </div>
+    <form method="post" action="">
+      {% csrf_token %}
+      {% for question, form in question_parts %}
+      <div class="question">
+        <h2>{{ forloop.counter }}. {{ question.title|capfirst }}</h2>
+        <p>{{ question.text }}</p>
+        {% show_form form %}
+      </div>
+      {% endfor %}
+      <input type="submit" value="Wyślij" />
+    </form>
   </body>
 </html>
