@@ -83,13 +83,13 @@ def questionnaires_my(request):
 
 def questionnaire_fill(request, quest_id):
     quest = get_object_or_404(Questionnaire, pk=quest_id)
-    answer_set = get_object_or_None(AnswerSet, user=request.user)
+    #answer_set = get_object_or_None(AnswerSet, user=request.user)
 
     questions = Question.objects.filter(questionnaire=quest.pk).order_by('number')
     question_parts = []
     for question in questions:
-        Form = question.get_form_class()
-        form_part = Form(prefix=('question_%s' % question.pk))
+        QuestionForm = question.get_form_class()
+        form_part = QuestionForm(question=question)
         question_parts.append((question, form_part))
 
     context = RequestContext(request)

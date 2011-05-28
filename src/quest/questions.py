@@ -6,25 +6,25 @@ from django.forms import widgets
 
 QuestionData = namedtuple('QuestionData', 'label form')
 
-class AnswerOpenForm(forms.Form):
+class AnswerBaseForm(forms.Form):
+    def __init__(self, question, choice_field_name = 'choice', *args, **kwargs):
+        if 'prefix' not in kwargs:
+            kwargs['prefix'] = 'question_%s' % question.pk
+        super(forms.Form, self).__init__(*args, **kwargs)
+        if choice_field_name in self.fields:
+            setattr(self.fields[choice_field_name], 'queryset', question.questionchoice_set.all())
+
     error_css_class = 'errors'
     required_css_class = 'required'
 
+class AnswerOpenForm(AnswerBaseForm):
     text = forms.CharField(label=u"odpowiedź", widget=widgets.Textarea)
 
-class AnswerSingleForm(forms.Form):
-    error_css_class = 'errors'
-    required_css_class = 'required'
+class AnswerSingleForm(AnswerBaseForm):
+    choice = forms.ModelChoiceField(label=u"wybierz jedno", queryset=[], empty_label=None, widget=widgets.RadioSelect)
 
-    choices = [('a', 'aaa'), ('b', 'bbb')]
-    choice = forms.ChoiceField(label=u"wybierz jedno", choices=choices, widget=widgets.RadioSelect)
-
-class AnswerMultiForm(forms.Form):
-    error_css_class = 'errors'
-    required_css_class = 'required'
-
-    choices = [('a', 'aaa'), ('b', 'bbb')]
-    choice = forms.ChoiceField(label=u"zaznacz pasujące", choices=choices, widget=widgets.CheckboxSelectMultiple)
+class AnswerMultiForm(AnswerBaseForm):
+    choice = forms.ModelMultipleChoiceField(label=u"zaznacz pasujące", queryset=[], widget=widgets.CheckboxSelectMultiple)
 
 question_types = {
             'open': QuestionData('pytanie otwarte', AnswerOpenForm),

@@ -3,7 +3,6 @@
 
 from django import forms
 from django.forms.models import inlineformset_factory
-from django.forms import widgets
 
 from quest.models import Questionnaire, Question, QuestionChoice
 from quest.questions import question_choices
