@@ -66,6 +66,7 @@ class Answer(models.Model):
     text = models.TextField()
     answer_set = models.ForeignKey(AnswerSet)
     question = models.ForeignKey(Question)
+    choices = models.ManyToManyField(QuestionChoice)
 
     def __unicode__(self):
         return u"Odpowiedź na pytanie '%s'" % self.question

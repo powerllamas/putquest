@@ -83,14 +83,28 @@ def questionnaires_my(request):
 
 def questionnaire_fill(request, quest_id):
     quest = get_object_or_404(Questionnaire, pk=quest_id)
-    #answer_set = get_object_or_None(AnswerSet, user=request.user)
+    answer_set = get_object_or_None(AnswerSet, user=request.user, questionnaire=quest)
+    if answer_set is None:
+        answer_set = AnswerSet(user=request.user, questionnaire=quest)
 
     questions = Question.objects.filter(questionnaire=quest.pk).order_by('number')
     question_parts = []
-    for question in questions:
-        QuestionForm = question.get_form_class()
-        form_part = QuestionForm(question=question)
-        question_parts.append((question, form_part))
+    if request.method == 'POST':
+        for question in questions:
+            QuestionForm = question.get_form_class()
+            form_part = QuestionForm(question, data=request.POST)
+            question_parts.append((question, form_part))
+        if all(part[1].is_valid() for part in question_parts):
+            answer_set.finished = True
+            answer_set.save()
+            for part in question_parts:
+                part[1].save(answer_set)
+            return redirect("index")
+    else:
+        for question in questions:
+            QuestionForm = question.get_form_class()
+            form_part = QuestionForm(question)
+            question_parts.append((question, form_part))
 
     context = RequestContext(request)
     return render_to_response('quest/questionnaire_fill.html', 
