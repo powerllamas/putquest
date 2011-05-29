@@ -24,7 +24,7 @@
       <div class="question">
         <h2>{{ forloop.counter }}. {{ question.title|capfirst }}</h2>
         <p>{{ question.text }}</p>
-        {% show_form form %}
+        {% show_question_form form %}
       </div>
       {% endfor %}
       <input type="submit" value="Wyślij" />

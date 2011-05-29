@@ -1,0 +1,21 @@
+<table>
+  {% for field in form %}
+    {% if field.css_classes %}
+    <tr class="{{ field.css_classes }}">
+    {% else %}
+    <tr>
+    {% endif %}
+      <th>
+          {{ field.label_tag }}
+      </th> 
+    </tr>
+    <tr>
+      <td>
+        {{ field }}
+      </td>
+      <td>
+        {{ field.errors }}
+      </td>
+    </tr>
+  {% endfor %}
+</table>

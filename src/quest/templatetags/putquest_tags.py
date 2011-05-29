@@ -15,6 +15,10 @@ def format_user(user):
 def show_form(form):
     return {'form': form }
 
+@register.inclusion_tag("question_form_snippet.html")
+def show_question_form(form):
+    return {'form': form }
+
 @register.inclusion_tag("formset_snippet.html")
 def show_formset(formset):
     return {'formset': formset }
