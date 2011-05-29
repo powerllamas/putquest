@@ -16,6 +16,7 @@ h1 {
 }
 
 h2 {
+  font-family: 'OFL Sorts Mill Goudy TT', serif;
   font-weight: normal;
 }
 
@@ -77,8 +78,22 @@ input[type="submit"] {
 }
 
 .footer a:hover {
-	border-bottom: 1px dotted #A39770;
-	margin-bottom: 0;
+  border-bottom: 1px dotted #A39770;
+  margin-bottom: 0;
+}
+
+.error_list li {
+  display: inline;
+  padding-right: .5em;
+  padding-bottom: .3em;
+  padding-left: 28px;
+  padding-top: .6em;
+  margin: 1em;
+  border-radius: .5em;
+  border 1px dashed #FFFFFF;
+  color: #FFFFFF;
+  text-shadow: 1px 1px 2px #2B2922;
+  background: url("/static/img/error.png") no-repeat 5px 50% #A32500;
 }
 /*
 #A39770;
