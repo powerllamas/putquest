@@ -46,6 +46,40 @@ ul {
 li {
   list-style-type: none;
 }
+
+input[type="submit"] {
+  padding: 0 .5em;
+  margin: .5em;
+  font-size: 150%;
+  font-family: 'OFL Sorts Mill Goudy TT', serif;
+}
+
+.footer {
+  font-family: 'OFL Sorts Mill Goudy TT', serif;
+  color: #BAB293;
+  background-color: #2B2922;
+  margin: 0;
+  padding: 0;
+  text-shadow: 0px 1px 1px #000;
+}
+
+.footer p {
+  text-align: right;
+  margin: 0 .5em;
+  padding: .5em .5em;
+}
+
+.footer a {
+	text-decoration: none;
+	color: #FFF;
+	text-shadow: -1px -1px 2px #000;
+	margin-bottom: 1px;
+}
+
+.footer a:hover {
+	border-bottom: 1px dotted #A39770;
+	margin-bottom: 0;
+}
 /*
 #A39770;
 #A32500;
