@@ -6,7 +6,6 @@ body {
 }
 
 h1 {
-  /*font-family: 'Buda', serif;*/
   font-family: 'OFL Sorts Mill Goudy TT', serif;
   color: #EFE4BD;
   background-color: #2B2922;
@@ -38,6 +37,7 @@ div.question {
   margin-top: 0;
   margin-bottom: 0;
   border-bottom: 1px dotted #A39770;
+  max-width: 50em;
 }
 ul {
   padding: 0;

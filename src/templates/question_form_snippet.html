@@ -1,21 +1,10 @@
-<table>
-  {% for field in form %}
-    {% if field.css_classes %}
-    <tr class="{{ field.css_classes }}">
-    {% else %}
-    <tr>
-    {% endif %}
-      <th>
-          {{ field.label_tag }}
-      </th> 
-    </tr>
-    <tr>
-      <td>
-        {{ field }}
-      </td>
-      <td>
-        {{ field.errors }}
-      </td>
-    </tr>
-  {% endfor %}
-</table>
+{% for field in form %}
+  <div class="choices {{ field.css_classes }}">
+    {{ field }}
+  </div>
+  {% if fiels.errors %}
+    <div class="error_list">
+      {{ field.errors }}
+    </div>
+  {% endif %}
+{% endfor %}
