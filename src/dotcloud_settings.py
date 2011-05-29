@@ -87,6 +87,8 @@ INSTALLED_APPS = (
 
     'south',
     'tabs',
+    'annoying',
+    'pluralize_pl',
 
     'accounts',
     'quest',

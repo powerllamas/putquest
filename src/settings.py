@@ -95,6 +95,7 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'tabs',
     'pluralize_pl',
+    'annoying',
 
     'accounts',
     'quest',
