@@ -26,6 +26,7 @@ class Question(models.Model):
     questionnaire = models.ForeignKey(Questionnaire)
     number = models.IntegerField(verbose_name=u"kolejność")
     type = models.CharField(max_length=64, choices=question_choices, verbose_name=u"rodzaj pytania")
+    active = models.BooleanField(verbose_name=u"aktywne", default=True)
 
     def __unicode__(self):
         return self.title
