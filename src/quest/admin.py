@@ -2,6 +2,16 @@
 from django.contrib import admin
 from quest.models import Questionnaire, Question, AnswerSet, Answer, QuestionChoice
 
+class QuestionAdmin(admin.ModelAdmin):
+    model = Question
+    
+    def queryset(self, request):
+        qs = self.model.objects_with_unactive.all()
+        ordering = self.ordering or ()
+        if ordering:
+            qs = qs.order_by(*ordering)
+        return qs
+
 class QuestionInline(admin.StackedInline):
     model = Question
 
@@ -28,7 +38,7 @@ class AnswerSetAdmin(admin.ModelAdmin):
 	
 admin.site.register(AnswerSet, AnswerSetAdmin)	
 admin.site.register(Questionnaire, QuestionnaireAdmin)
-admin.site.register(Question)
+admin.site.register(Question, QuestionAdmin)
 admin.site.register(QuestionChoice)
 admin.site.register(Answer)
 

@@ -20,6 +20,10 @@ class Questionnaire(models.Model):
         verbose_name = u"ankieta"
         verbose_name_plural = u"ankiety"
 
+class ActiveQuestionManager(models.Manager):
+    def get_query_set(self):
+        return super(ActiveQuestionManager, self).get_query_set().filter(active=True)
+
 class Question(models.Model):
     title = models.CharField(max_length=100, verbose_name=u"tytuł")
     text = models.TextField(verbose_name=u"treść pytania")
@@ -28,12 +32,16 @@ class Question(models.Model):
     type = models.CharField(max_length=64, choices=question_choices, verbose_name=u"rodzaj pytania")
     active = models.BooleanField(verbose_name=u"aktywne", default=True)
 
+    objects = ActiveQuestionManager()
+    objects_with_unactive = models.Manager()
+
     def __unicode__(self):
         return self.title
 
     class Meta:
         verbose_name = u"pytanie"
         verbose_name_plural = u"pytania"
+        ordering = ['number']
 
     def get_form_class(self):
         return question_types[self.type].form
