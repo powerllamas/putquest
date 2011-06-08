@@ -32,4 +32,7 @@ urlpatterns = patterns('',
             }, name='question_edit'),
 
     url(r'^questionnaire/(?P<quest_id>\d+)/$', 'quest.views.questionnaire', name='questionnaire'),
+
+    url(r'^questionnaire/(?P<quest_id>\d+)/question/(?P<question_id>\d+)/delete/$',
+            'quest.views.question_delete', name='question_delete'),
 )

@@ -21,11 +21,23 @@ Edycja ankiety
     <div class="form_box">
     <h3>Lista pytań</h3>
     {% if questions %}
-    <ol>
+    <table>
         {% for question in questions %}
-        <li><a href="{% url "question_edit" quest_id=quest.pk question_id=question.pk %}">{{ question.title }}</a></li>
+        <tr>
+            <td>{{ forloop.counter }}.</td>
+            <td>
+                <a href="{% url "question_edit" quest_id=quest.pk question_id=question.pk %}">
+                    {{ question.title }}
+                </a>
+            </td>
+            <td>
+                <a href="{% url "question_delete" quest_id=quest.pk question_id=question.pk %}" class="action_link">
+                    Usuń
+                </a>
+            </td>
+        </tr>
         {% endfor %}
-    </ol>
+    </table>
     {% else %}
         <p>Nie dodano jeszcze żadnych pytań.</p>
     {% endif %}

@@ -38,6 +38,10 @@ class Question(models.Model):
     def get_form_class(self):
         return question_types[self.type].form
 
+    def set_active(self, flag):
+        self.active = flag
+        self.save()
+
 class QuestionChoice(models.Model):
     question = models.ForeignKey(Question)
     name = models.CharField(max_length=200, verbose_name=u"treść wyboru")

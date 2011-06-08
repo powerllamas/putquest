@@ -1,0 +1,31 @@
+{% extends 'base_with_navbar.html' %}
+{% load url from future %}
+
+{% load tabs %}
+{% load putquest_tags %}
+
+{% block title %}
+Edycja pytania | {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="form_box">
+    <h3>Na pewno chcesz usunąć poniższe pytanie?</h3>
+    <dl>
+        <dt><h4>{{ question.title }}</h4></dt>
+        <dd>
+        {{ question.text }}
+            <ul>
+            {% for choice in question.questionchoice_set.all %}
+                <li> {{ choice.name }} </li>
+            {% endfor %}
+            </ul>
+        </dd>
+    </dl>
+    <form method="post" action="">
+        {% csrf_token %}
+        <input name="action:delete" type="submit" value="Usuń pytanie" />
+        <input name="action:cancel" type="submit" value="Anuluj" />
+    </form>
+</div>
+{% endblock %}
