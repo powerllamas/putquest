@@ -21,6 +21,13 @@ class QuestionnaireAdmin(admin.ModelAdmin):
 #    ]
     list_display = ['name', 'owner', 'public', 'published', 'active',]
 
+    def queryset(self, request):
+        qs = self.model.objects_with_unactive.all()
+        ordering = self.ordering or ()
+        if ordering:
+            qs = qs.order_by(*ordering)
+        return qs
+
 # class AnswerInlineForm(forms.ModelForm):
     # def __init__(self, *args, **kwargs):
         # super(AnswerInlineForm, self).__init__(*args, **kwargs)

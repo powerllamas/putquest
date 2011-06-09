@@ -5,23 +5,26 @@
 {% load putquest_tags %}
 
 {% block title %}
-Usuń pytanie | {{ block.super }}
+Usuń ankietę | {{ block.super }}
 {% endblock %}
 
 {% block content %}
 <div class="form_box">
-    <h3>Na pewno chcesz usunąć poniższe pytanie?</h3>
+    <h3>Na pewno chcesz usunąć poniższą ankietę?</h3>
     <dl>
-        <dt><h4>{{ question.title }}</h4></dt>
+        <dt><h4>{{ quest.name}}</h4></dt>
         <dd>
-        {{ question.text }}
-        {% with question.questionchoice_set.all as choices %}
-        {% if choices %}
+        <p>{{ quest.description }}<p>
+        {% with quest.question_set.all as questions %}
+        {% if questions %}
+        <p>Pytania:</p>
             <ul>
-            {% for choice in choices %}
-                <li> {{ choice.name }} </li>
+            {% for question in quest.question_set.all %}
+                <li> {{ question.title }} </li>
             {% endfor %}
-            </ul>
+        </ul>
+        {% else %}
+        <p>Brak pytań.</p>
         {% endif %}
         {% endwith %}
         </dd>

@@ -45,6 +45,19 @@ def questionnaire_modify(request, quest_id=None, template='quest/questionnaire_m
             context_instance=context)
 
 @login_required
+def questionnaire_delete(request, quest_id):
+    quest = get_object_or_404(Questionnaire, pk=quest_id, owner=request.user)
+
+    if request.method == 'POST':
+        if 'action:delete' in request.POST:
+            quest.set_active(False)
+        return redirect("quest.views.questionnaires_my")
+
+    context = RequestContext(request)
+    return render_to_response('quest/questionnaire_delete.html', 
+            {'quest': quest}, context_instance=context)
+
+@login_required
 def question_modify(request, quest_id, question_id=None, template='quest/question_modify.html'):
     quest = get_object_or_404(Questionnaire, pk=quest_id, owner=request.user)
     if question_id is None:

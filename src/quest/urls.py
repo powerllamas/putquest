@@ -19,6 +19,10 @@ urlpatterns = patterns('',
             'template': 'quest/questionnaire_edit.html',
         }, name='questionnaire_edit'),
 
+    url(r'^questionnaire/(?P<quest_id>\d+)/delete/$', 
+        'quest.views.questionnaire_delete',
+        name='questionnaire_delete'),
+
     url(r'^questionnaire/(?P<quest_id>\d+)/question/new/$', 
             'quest.views.question_modify',
             {
@@ -31,8 +35,8 @@ urlpatterns = patterns('',
                 'template': 'quest/question_edit.html',
             }, name='question_edit'),
 
-    url(r'^questionnaire/(?P<quest_id>\d+)/$', 'quest.views.questionnaire', name='questionnaire'),
-
     url(r'^questionnaire/(?P<quest_id>\d+)/question/(?P<question_id>\d+)/delete/$',
             'quest.views.question_delete', name='question_delete'),
+
+    url(r'^questionnaire/(?P<quest_id>\d+)/$', 'quest.views.questionnaire', name='questionnaire'),
 )
