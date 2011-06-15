@@ -133,7 +133,6 @@ def questionnaire_fill(request, quest_id):
         for question in questions:
             QuestionForm = question.get_form_class()
             answer = get_object_or_None(Answer, answer_set=answer_set.pk, question=question.pk)
-            print answer
             form_part = QuestionForm(question, instance=answer)
             question_parts.append((question, form_part))
 

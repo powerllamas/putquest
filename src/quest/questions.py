@@ -26,7 +26,6 @@ class AnswerOpenForm(AnswerBaseForm):
         from quest.models import Answer
         text = self.cleaned_data['text']
         if self._instance is not None:
-            print self._instance
             answer = self._instance
         else:
             answer = Answer()
@@ -44,7 +43,6 @@ class AnswerSingleForm(AnswerBaseForm):
         from quest.models import Answer
         choices = [self.cleaned_data['choice'], ]
         if self._instance is not None:
-            print self._instance
             answer = self._instance
         else:
             answer = Answer()
@@ -62,7 +60,6 @@ class AnswerMultiForm(AnswerBaseForm):
         from quest.models import Answer
         choices = self.cleaned_data['choice']
         if self._instance is not None:
-            print self._instance
             answer = self._instance
         else:
             answer = Answer()
