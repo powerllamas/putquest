@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from annoying.functions import get_object_or_None
 
-from quest.models import Questionnaire, Question, AnswerSet
+from quest.models import Questionnaire, Question, Answer, AnswerSet
 from quest.forms import QuestForm, QuestionForm, ChoiceFormSet
 
 def index(request):
@@ -108,6 +108,7 @@ def questionnaires_my(request):
     context = RequestContext(request)
     return render_to_response('quest/questionnaires_my.html', {'quests': quests}, context_instance=context)
 
+@login_required
 def questionnaire_fill(request, quest_id):
     quest = get_object_or_404(Questionnaire, pk=quest_id)
     answer_set = get_object_or_None(AnswerSet, user=request.user, questionnaire=quest)
@@ -119,7 +120,8 @@ def questionnaire_fill(request, quest_id):
     if request.method == 'POST':
         for question in questions:
             QuestionForm = question.get_form_class()
-            form_part = QuestionForm(question, data=request.POST)
+            answer = get_object_or_None(Answer, answer_set=answer_set.pk, question=question.pk)
+            form_part = QuestionForm(question, data=request.POST, instance=answer)
             question_parts.append((question, form_part))
         if all(part[1].is_valid() for part in question_parts):
             answer_set.finished = True
@@ -130,7 +132,9 @@ def questionnaire_fill(request, quest_id):
     else:
         for question in questions:
             QuestionForm = question.get_form_class()
-            form_part = QuestionForm(question)
+            answer = get_object_or_None(Answer, answer_set=answer_set.pk, question=question.pk)
+            print answer
+            form_part = QuestionForm(question, instance=answer)
             question_parts.append((question, form_part))
 
     context = RequestContext(request)

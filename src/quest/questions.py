@@ -7,13 +7,14 @@ from django.forms import widgets
 QuestionData = namedtuple('QuestionData', 'label form')
 
 class AnswerBaseForm(forms.Form):
-    def __init__(self, question, choice_field_name = 'choice', *args, **kwargs):
+    def __init__(self, question, choice_field_name = 'choice', instance=None, *args, **kwargs):
         if 'prefix' not in kwargs:
             kwargs['prefix'] = 'question_%s' % question.pk
         super(forms.Form, self).__init__(*args, **kwargs)
         if choice_field_name in self.fields:
             setattr(self.fields[choice_field_name], 'queryset', question.questionchoice_set.all())
         self._question = question
+        self._instance = instance
 
     error_css_class = 'errors'
     required_css_class = 'required'
@@ -24,8 +25,16 @@ class AnswerOpenForm(AnswerBaseForm):
     def save(self, answer_set):
         from quest.models import Answer
         text = self.cleaned_data['text']
-        answer = Answer(text=text, answer_set=answer_set, question=self._question)
+        if self._instance is not None:
+            print self._instance
+            answer = self._instance
+        else:
+            answer = Answer()
+        answer.text = text
+        answer.answer_set=answer_set
+        answer.question=self._question
         answer.save()
+        answer.choices = []
         return answer
 
 class AnswerSingleForm(AnswerBaseForm):
@@ -34,7 +43,14 @@ class AnswerSingleForm(AnswerBaseForm):
     def save(self, answer_set):
         from quest.models import Answer
         choices = [self.cleaned_data['choice'], ]
-        answer = Answer(answer_set=answer_set, question=self._question)
+        if self._instance is not None:
+            print self._instance
+            answer = self._instance
+        else:
+            answer = Answer()
+        answer.text = ''
+        answer.answer_set = answer_set
+        answer.question = self._question
         answer.save()
         answer.choices = choices
         return answer
@@ -45,7 +61,14 @@ class AnswerMultiForm(AnswerBaseForm):
     def save(self, answer_set):
         from quest.models import Answer
         choices = self.cleaned_data['choice']
-        answer = Answer(answer_set=answer_set, question=self._question)
+        if self._instance is not None:
+            print self._instance
+            answer = self._instance
+        else:
+            answer = Answer()
+        answer.text = ''
+        answer.answer_set = answer_set
+        answer.question = self._question
         answer.save()
         answer.choices = choices
         return answer

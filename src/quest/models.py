@@ -73,9 +73,10 @@ class AnswerSet(models.Model):
     finished = models.BooleanField(verbose_name=u'zakończono')
     user = models.ForeignKey(User, blank=True, null=True, verbose_name=u"wypełniająca/y")
     questionnaire = models.ForeignKey(Questionnaire)
+    created_at = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        return u"Ankieta '%s' wypełniona przez '%s'"
+        return str(self.created_at)
 
     class Meta:
         verbose_name = u"Wypełniona ankieta"
