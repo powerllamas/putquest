@@ -348,9 +348,30 @@ span.datetime {
   font-weight: bold;
 }
 
+table.stats {
+  background: #FFFAEE;
+  padding: 1em;
+  margin: 1em;
+  border: 1px solid #A39770;
+}
+
+table.stats th {
+  font-weight: bold;
+}
+
+table.stats tbody tr:nth-child(odd) {
+  background: #EFE4BD;
+}
+
+table.stats td.number {
+  text-align: right;
+}
+
 .question dl {
   background: #FFFAEE;
   padding: 1em;
+  margin: 1em;
+  border: 1px solid #A39770;
 }
 
 .question dt {

@@ -41,25 +41,26 @@ Posumowanie: {{ quest.name }} | {{ block.super }}
           {% endif %}
       </dl>
       {% else %}
-      <dl>
-          <dt>Udzielone odpowiedzi na pytanie zamknięte:</dt>
-          {% if answers %}
-          <dd>
-          <table>
-            {% for answer in answers %}
+        {% if answers %}
+        <table class="stats">
+        <thead>
             <tr>
-                <td>{{ answer.0 }}</td>
-                <td>{{ answer.1 }}</td>
+                <th>Możliwe odpowiedzi</th>
+                <th>Ile razy wybrano</th>
             </tr>
-            {% endfor %}
-          </table>
-          </dd>
-          {% else %}
-          <dd>
-          <p><span class="error">Brak odpowiedzi.</span></p>
-          </dd>
-          {% endif %}
-      </dl>
+        </thead>
+        <tbody>
+        {% for answer in answers %}
+        <tr>
+            <td>{{ answer.0 }}</td>
+            <td class="number">{{ answer.1 }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+        {% else %}
+        <p><span class="error">Brak odpowiedzi.</span></p>
+        {% endif %}
       {% endif %}
     </div>
     {% endfor %}
