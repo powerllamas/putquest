@@ -84,10 +84,10 @@ class AnswerSet(models.Model):
 
 
 class Answer(models.Model):
-    text = models.TextField()
+    text = models.TextField(blank=True, null=True)
     answer_set = models.ForeignKey(AnswerSet)
     question = models.ForeignKey(Question)
-    choices = models.ManyToManyField(QuestionChoice)
+    choices = models.ManyToManyField(QuestionChoice, blank=True, null=True)
 
     def __unicode__(self):
         return u"Odpowiedź na pytanie '%s'" % self.question

@@ -4,8 +4,15 @@
 
 {% load pluralize_pl %}
 
+{% block scripts %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/excanvas.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.flot.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.flot.pie.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/summary.js"></script>
+{% endblock %}
+
 {% block title %}
-Posumowanie: {{ quest.name }} | {{ block.super }}
+Podsumowanie: {{ quest.name }} | {{ block.super }}
 {% endblock %}
 
 {% block content %}

@@ -348,7 +348,7 @@ span.datetime {
   font-weight: bold;
 }
 
-table.stats {
+table.stats, .graph {
   background: #FFFAEE;
   padding: 1em;
   margin: 1em;
