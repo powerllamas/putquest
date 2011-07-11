@@ -132,7 +132,7 @@ def questionnaire_fill(request, quest_id):
     if answer_set is None:
         answer_set = AnswerSet(user=request.user, questionnaire=quest)
     else:
-        return show_filled_questionnaire(request, answer_set.pk)
+        return redirect("show_answer_set", answer_set_id=answer_set.pk)
 
     questions = Question.objects.filter(questionnaire=quest.pk).order_by('number')
     question_parts = []

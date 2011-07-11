@@ -8,6 +8,8 @@ urlpatterns = patterns('',
 
     url(r'^fill/(?P<quest_id>\d+)/$', 'quest.views.questionnaire_fill', name='questionnaire_fill'),
 
+    url(r'^show_answer/(?P<answer_set_id>\d+)/$', 'quest.views.show_filled_questionnaire', name='show_answer_set'),
+
     url(r'^questionnaire/new/$', 'quest.views.questionnaire_modify',
         {
             'template': 'quest/questionnaire_new.html',

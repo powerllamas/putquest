@@ -13,12 +13,13 @@ Wypełniono: {{ quest.name }} | {{ block.super }}
 
     {% if user == answer_set.user %}
     <p class="notice">
-      Ankieta została już wypełniona.
+      Ankieta została już wypełniona <span class="datetime">{{ answer_set.created_at }}</span>.
     </p>
-    {% endif %}
+    {% else %}
     <p>
     Ankietę wypełniono: <span class="datetime">{{ answer_set.created_at }}</span>.
     </p>
+    {% endif %}
 
     {% if quest.description %}
     <p class="quest_description">{{ quest.description }}</p>

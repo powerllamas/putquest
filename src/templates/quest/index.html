@@ -1,4 +1,7 @@
 {% extends 'base_with_navbar.html' %}
+
+{% load url from future %}
+
 {% load tabs %}
 
 {% block topnav %}
@@ -11,14 +14,20 @@ Strona główna | {{ block.super }}
 {% endblock%}
 
 {% block content %}
-Hello!
+<div class="quest_list">
+<h3>Dostępne ankiety</h3>
 
 {% if quests %}
-<ul>
+<table>
 {% for quest in quests %}
-<li> <a href="/questionnaire/{{quest.pk}}">{{ quest.name }} </a></li>
+<tr>
+    <td><a href="{% url "questionnaire" quest.pk %}">{{ quest.name }} </a></td>
+    <td><a href="{% url "questionnaire_fill" quest.pk %}" class="action_link"> Wypełnij </a></td>
+</tr>
 {% endfor %}
-</ul>
+</table>
+{% else %}
+<p>Brak ankiet.</p>
 {% endif %}
-
+</div>
 {% endblock %}
