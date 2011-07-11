@@ -336,7 +336,7 @@ button:disabled, input[type="submit"]:disabled {
   display: inline;
 }
 
-.answers .question {
+.answers .question, .questions .question {
   border-top: 1px dashed #A39770;
 }
 
@@ -353,10 +353,10 @@ span.datetime {
   font-weight: bold;
 }
 
-.question li {
+.answers .question li {
   color: #999999;
 }
 
-.question li.chosen {
+.answers .question li.chosen {
   color: #000000;
 }

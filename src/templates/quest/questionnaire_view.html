@@ -1,24 +1,45 @@
 {% extends 'base_with_navbar.html' %}
 
+{% load url from future %}
+
+{% load pluralize_pl %}
+
 {% block title %}
 {{ quest.name }} | {{ block.super }}
 {% endblock %}
 
 {% block content %}
-<h3>{{ quest.name }}</h3>
+<div>
+<h2>{{ quest.name }}</h2>
+    {% if quest.description %}
+        <p>{{ quest.description }}</p>
+    {% endif %}
+    {% with qcount=questions|length %}
+    <p>Ankieta zawiera {{ qcount }} {{ qcount|pluralize_pl:"pytanie,pytań,pytania" }}.</p>
+    {% endwith %}
+</div>
 
-{% for question in questions %}
-<dl>
-    <dt>{{ forloop.counter }}. {{ question.title }}</dt>
-    <dd>
-    {{ question.text }}
+{% if questions %}
+<div class="questions">
+    {% for question in questions %}
+    <div class="question">
+      <h3>{{ forloop.counter }}. {{ question.title|capfirst }}</h3>
+      <p>{{ question.text }}</p>
+      {% if question.type == 'open' %}
+        <p>Pytanie otwarte.</p>
+      {% else %}
         <ul>
         {% for choice in question.questionchoice_set.all %}
-            <li> {{ choice.name }} </li>
+            <li>{{ choice }}</li>
         {% endfor %}
         </ul>
-    </dd>
+      {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="error">Ankieta nie zawiera jeszcze pytań.</p>
+{% endif %}
 
-</dl>
-{% endfor %}
+<a href="{% url "questionnaire_fill" quest.pk %}" class="action_link">Wypełnij tę ankietę</a>
 {% endblock %}
