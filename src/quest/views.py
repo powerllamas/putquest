@@ -11,7 +11,7 @@ from quest.models import Questionnaire, Question, Answer, AnswerSet
 from quest.forms import QuestForm, QuestionForm, ChoiceFormSet
 
 def index(request):
-    quests = Questionnaire.objects.all()
+    quests = Questionnaire.objects.filter(published=True, public=True)
     context = RequestContext(request)
     return render_to_response('quest/index.html', {'quests': quests}, context_instance=context)
 

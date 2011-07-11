@@ -1,23 +1,24 @@
+{% extends 'base_with_navbar.html' %}
+
 {% load pluralize_pl %}
 {% load putquest_tags %}
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>{{ quest.name }}</title>
-    <link  href="http://fonts.googleapis.com/css?family=OFL+Sorts+Mill+Goudy+TT:regular,italic" rel="stylesheet" type="text/css" >
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/form.css" type="text/css" media="screen" />
-  </head>
-  <body>
-    <div class="header">
-    <h1>{{ quest.name }}</h1>
+{% block title %}
+Wypełniono: {{ quest.name }} | {{ block.super }}
+{% endblock %}
+
+{% block content %}
+  <div class="quest_info">
+    <h2>{{ quest.name }}</h2>
+
     {% if user == answer_set.user %}
-    <p class="error">
+    <p class="notice">
       Ankieta została już wypełniona.
     </p>
     {% endif %}
+
     {% if quest.description %}
-    <p>{{ quest.description }}</p>
+    <p class="quest_description">{{ quest.description }}</p>
     {% endif %}
     <p>
       Ankietę wypełniono: {{ answer_set.created_at }}.
@@ -25,43 +26,39 @@
     {% with qcount=question_parts|length %}
     <p>Ankieta zawiera {{ qcount }} {{ qcount|pluralize_pl:"pytanie,pytań,pytania" }}.</p>
     {% endwith %}
-    </div>
-    <div class="answers">
-      {% for question, answer in question_parts %}
-      <div class="question">
-        <h2>{{ forloop.counter }}. {{ question.title|capfirst }}</h2>
-        <p>{{ question.text }}</p>
-        {% if question.type == 'open' %}
-        <dl>
-          <dt>Odpowiedź:</dt>
-          <dd>{{ answer.text }}<dd>
-        </dl>
+  </div>
+  <div class="answers">
+    {% for question, answer in question_parts %}
+    <div class="question">
+      <h3>{{ forloop.counter }}. {{ question.title|capfirst }}</h3>
+      <p>{{ question.text }}</p>
+      {% if question.type == 'open' %}
+      <dl>
+        <dt>Odpowiedź:</dt>
+        <dd>{{ answer.text }}<dd>
+      </dl>
+      {% else %}
+      <dl>
+        {% if question.type == 'single_selection' %}
+          <dt>Wybrana odpowiedź:</dt>
         {% else %}
-        <dl>
-          {% if question.type == 'single_selection' %}
-            <dt>Wybrana odpowiedź:</dt>
-          {% else %}
-            <dt>Wybrane odpowiedzi:</dt>
-          {% endif %}
-          <dd>
-            <ul>
-              {% for choice in question.questionchoice_set.all %}
-              {% if choice in answer.choices.all %}
-              <li><b class="chosen">{{ choice }}</b></li>
-              {% else %}
-              <li>{{ choice }}</li>
-              {% endif %}
-              {% endfor %}
-            </ul>
-          </dd>
-        </dl>
+          <dt>Wybrane odpowiedzi:</dt>
         {% endif %}
+        <dd>
+          <ul>
+            {% for choice in question.questionchoice_set.all %}
+            {% if choice in answer.choices.all %}
+            <li><b class="chosen">{{ choice }}</b></li>
+            {% else %}
+            <li>{{ choice }}</li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </dd>
+      </dl>
+      {% endif %}
 
-      </div>
-      {% endfor %}
     </div>
-    <div class="footer">
-      <p>Ankieta utworzona w serwisie <a href="/">putQuest</a>.</p>
-    </div>
-  </body>
-</html>
+    {% endfor %}
+  </div>
+{% endblock %}
