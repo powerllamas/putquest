@@ -16,13 +16,13 @@ Wypełniono: {{ quest.name }} | {{ block.super }}
       Ankieta została już wypełniona.
     </p>
     {% endif %}
+    <p>
+    Ankietę wypełniono: <span class="datetime">{{ answer_set.created_at }}</span>.
+    </p>
 
     {% if quest.description %}
     <p class="quest_description">{{ quest.description }}</p>
     {% endif %}
-    <p>
-      Ankietę wypełniono: {{ answer_set.created_at }}.
-    </p>
     {% with qcount=question_parts|length %}
     <p>Ankieta zawiera {{ qcount }} {{ qcount|pluralize_pl:"pytanie,pytań,pytania" }}.</p>
     {% endwith %}
@@ -48,7 +48,7 @@ Wypełniono: {{ quest.name }} | {{ block.super }}
           <ul>
             {% for choice in question.questionchoice_set.all %}
             {% if choice in answer.choices.all %}
-            <li><b class="chosen">{{ choice }}</b></li>
+            <li class="chosen">{{ choice }}</li>
             {% else %}
             <li>{{ choice }}</li>
             {% endif %}

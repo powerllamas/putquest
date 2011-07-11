@@ -322,3 +322,41 @@ button:disabled, input[type="submit"]:disabled {
 	color: #008D00;
 	padding-left: 1em;
 }
+
+.notice {
+	padding: .5em;
+	margin: 1em;
+  margin-left: 0;
+	border-radius: .5em;
+	border 1px dashed #FFFFFF;
+	color: #FFFFFF;
+	text-shadow: 1px 1px 2px #2B2922;
+	background: url("/static/img/notice.png") no-repeat 5px 50% #009F00;
+	padding-left: 28px;
+  display: inline;
+}
+
+.answers .question {
+  border-top: 1px dashed #A39770;
+}
+
+span.datetime {
+  font-weight: bold;
+}
+
+.question dl {
+  background: #FFFAEE;
+  padding: 1em;
+}
+
+.question dt {
+  font-weight: bold;
+}
+
+.question li {
+  color: #999999;
+}
+
+.question li.chosen {
+  color: #000000;
+}
