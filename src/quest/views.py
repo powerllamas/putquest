@@ -121,7 +121,7 @@ def show_filled_questionnaire(request, answer_set_id):
         question_parts.append((question, answer))
     context = RequestContext(request)
     return render_to_response('quest/show_filled.html', 
-            {'user': answer_set.user, 'answer_set': answer_set, 
+            {'answer_set': answer_set, 
                 'quest': answer_set.questionnaire, 'question_parts': question_parts }, 
             context_instance=context)
 

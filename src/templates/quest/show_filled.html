@@ -11,7 +11,7 @@ Wypełniono: {{ quest.name }} | {{ block.super }}
   <div class="quest_info">
     <h2>{{ quest.name }}</h2>
 
-    {% if user == answer_set.user %}
+    {% if request.user == answer_set.user %}
     <p class="notice">
       Ankieta została już wypełniona <span class="datetime">{{ answer_set.created_at }}</span>.
     </p>
