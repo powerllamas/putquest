@@ -3,6 +3,7 @@
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 
 from annoying.functions import get_object_or_None
 
@@ -109,11 +110,29 @@ def questionnaires_my(request):
     return render_to_response('quest/questionnaires_my.html', {'quests': quests}, context_instance=context)
 
 @login_required
+def show_filled_questionnaire(request, answer_set_id):
+    answer_set = get_object_or_404(AnswerSet, pk=answer_set_id)
+    if request.user not in (answer_set.user, answer_set.questionnaire.owner):
+        raise Http404
+    questions = Question.objects.filter(questionnaire=answer_set.questionnaire.pk).order_by('number')
+    question_parts = []
+    for question in questions:
+        answer = get_object_or_None(Answer, answer_set=answer_set.pk, question=question.pk)
+        question_parts.append((question, answer))
+    context = RequestContext(request)
+    return render_to_response('quest/show_filled.html', 
+            {'user': answer_set.user, 'answer_set': answer_set, 
+                'quest': answer_set.questionnaire, 'question_parts': question_parts }, 
+            context_instance=context)
+
+@login_required
 def questionnaire_fill(request, quest_id):
     quest = get_object_or_404(Questionnaire, pk=quest_id)
     answer_set = get_object_or_None(AnswerSet, user=request.user, questionnaire=quest)
     if answer_set is None:
         answer_set = AnswerSet(user=request.user, questionnaire=quest)
+    else:
+        return show_filled_questionnaire(request, answer_set.pk)
 
     questions = Question.objects.filter(questionnaire=quest.pk).order_by('number')
     question_parts = []

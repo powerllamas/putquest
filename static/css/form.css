@@ -95,6 +95,20 @@ input[type="submit"] {
   text-shadow: 1px 1px 2px #2B2922;
   background: url("/static/img/error.png") no-repeat 5px 50% #A32500;
 }
+
+.header p.error {
+	font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+	padding: .5em;
+	margin: 1em;
+	border-radius: .5em;
+	border 1px dashed #FFFFFF;
+	color: #FFFFFF;
+	text-shadow: 1px 1px 2px #2B2922;
+	background: url("/static/img/error.png") no-repeat 5px 50% #A32500;
+	padding-left: 28px;
+	display: inline;
+}
+
 /*
 #A39770;
 #A32500;
