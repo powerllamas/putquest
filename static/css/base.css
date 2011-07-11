@@ -115,6 +115,10 @@
 	padding-left: 28px;
 }
 
+span.error {
+  margin-left: 0;
+}
+
 .form_box a {
 	font-weight: bold;
 }

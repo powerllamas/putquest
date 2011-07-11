@@ -38,7 +38,7 @@
     {% endfor %}
 </div>
 {% else %}
-<p class="error">Ankieta nie zawiera jeszcze pytań.</p>
+<p><span class="error">Ankieta nie zawiera jeszcze pytań.</span></p>
 {% endif %}
 
 <a href="{% url "questionnaire_fill" quest.pk %}" class="action_link">Wypełnij tę ankietę</a>

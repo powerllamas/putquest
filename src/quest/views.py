@@ -169,3 +169,28 @@ def questionnaire_answers(request, quest_id):
     return render_to_response('quest/questionnaire_answers.html',
             {'quest': quest, 'answer_sets': answer_sets},
             context_instance=context)
+
+@login_required
+def questionnaire_summary(request, quest_id):
+    quest = get_object_or_404(Questionnaire, pk=quest_id, owner=request.user)
+    answer_sets = AnswerSet.objects.filter(questionnaire=quest.pk, finished=True)
+
+    questions_data = []
+    for question in quest.question_set.order_by('number'):
+        answers = []
+        if question.type == 'open':
+            for answer_set in answer_sets:
+                answer = answer_set.answer_set.get(question=question).text
+                answers.append(answer)
+        else:
+            for choice in question.questionchoice_set.order_by('order'):
+                answer = (choice.name, choice.answer_set.count())
+                answers.append(answer)
+        question_data = (question, answers)
+        questions_data.append(question_data)
+
+    context = RequestContext(request)
+    return render_to_response('quest/questionnaire_summary.html', 
+            {'quest': quest, 'answer_sets': answer_sets, 'questions': quest.question_set.all,
+                'questions_data': questions_data },
+            context_instance=context)

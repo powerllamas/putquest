@@ -1,0 +1,70 @@
+{% extends 'base_with_navbar.html' %}
+
+{% load url from future %}
+
+{% load pluralize_pl %}
+
+{% block title %}
+Posumowanie: {{ quest.name }} | {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div>
+<h2>{{ quest.name }}</h2>
+    {% if quest.description %}
+        <p>{{ quest.description }}</p>
+    {% endif %}
+    {% with qcount=questions|length %}
+    <p>Ankieta zawiera {{ qcount }} {{ qcount|pluralize_pl:"pytanie,pytań,pytania" }}.</p>
+    {% endwith %}
+</div>
+
+{% if questions %}
+<div class="questions">
+    {% for question, answers in questions_data %}
+    <div class="question">
+      <h3>{{ forloop.counter }}. {{ question.title|capfirst }}</h3>
+      <p>{{ question.text }}</p>
+      {% if question.type == 'open' %}
+      <dl>
+          <dt>Udzielone odpowiedzi na pytanie otwarte:</dt>
+          {% if answers %}
+          <dd>
+          {% for answer in answers %}
+          <p>{{ answer }}</p>
+          {% endfor %}
+          </dd>
+          {% else %}
+          <dd>
+          <p><span class="error">Brak odpowiedzi.</span></p>
+          </dd>
+          {% endif %}
+      </dl>
+      {% else %}
+      <dl>
+          <dt>Udzielone odpowiedzi na pytanie zamknięte:</dt>
+          {% if answers %}
+          <dd>
+          <table>
+            {% for answer in answers %}
+            <tr>
+                <td>{{ answer.0 }}</td>
+                <td>{{ answer.1 }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+          </dd>
+          {% else %}
+          <dd>
+          <p><span class="error">Brak odpowiedzi.</span></p>
+          </dd>
+          {% endif %}
+      </dl>
+      {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p><span class="error">Ankieta nie zawiera jeszcze pytań.</span></p>
+{% endif %}
+{% endblock %}

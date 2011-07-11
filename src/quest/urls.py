@@ -12,6 +12,8 @@ urlpatterns = patterns('',
 
     url(r'^questionnaire/(?P<quest_id>\d+)/answers/$', 'quest.views.questionnaire_answers', name='questionnaire_answers'),
 
+    url(r'^questionnaire/(?P<quest_id>\d+)/summary/$', 'quest.views.questionnaire_summary', name='questionnaire_summary'),
+
     url(r'^questionnaire/new/$', 'quest.views.questionnaire_modify',
         {
             'template': 'quest/questionnaire_new.html',
