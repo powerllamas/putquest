@@ -23,6 +23,8 @@ Moje ankiety | {{ block.super }}
         <td><a href="{% url "questionnaire" quest.pk %}">{{ quest.name }} </a></td>
         <td><a href="{% url "questionnaire_edit" quest.pk %}" class="action_link"> Edycja </a></td>
         <td><a href="{% url "questionnaire_delete" quest.pk %}" class="action_link"> Usuń </a></td>
+        <td><a href="{% url "questionnaire_answers" quest.pk %}" class="action_link"> Odpowiedzi </a></td>
+        <td><a href="" class="action_link"> Podsumowanie </a></td>
     </tr>
     {% endfor %}
     </table>

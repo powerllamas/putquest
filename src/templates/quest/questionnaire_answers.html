@@ -1,0 +1,25 @@
+{% extends 'base_with_navbar.html' %}
+
+{% load url from future %}
+
+{% load tabs %}
+
+{% block title %}
+Odpowiedzi: {{ quest.name }} | {{ block.super }}
+{% endblock%}
+
+{% block content %}
+<div class="quest_list">
+    <h3>Udzielone odpowiedzi dla ankiety "{{ quest.name }}"</h3>
+
+{% if answer_sets %}
+<ul>
+{% for answer_set in answer_sets %}
+    <li><a href="{% url "show_answer_set" answer_set.pk %}">{{ answer_set }} </a></li>
+{% endfor %}
+</ul>
+{% else %}
+<p>Brak odpowiedzi.</p>
+{% endif %}
+</div>
+{% endblock %}
