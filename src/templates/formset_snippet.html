@@ -9,19 +9,23 @@
     {% endfor %}
   </tr></thead>
   {% endif %}
-  <tr class="{% cycle row1,row2 %}">
-  {% for field in form.visible_fields %}
-    <td>
-    {# Include the hidden fields in the form #}
-    {% if forloop.first %}
-      {% for hidden in form.hidden_fields %}
-      {{ hidden }}
-      {% endfor %}
-    {% endif %}
-      {{ field.errors.as_ul }}
-      {{ field }}
-    </td>
-  {% endfor %}
-  </tr>
 {% endfor %}
+<tbody>
+  {% for form in formset.forms %}
+    <tr class="{% cycle row1,row2 %}">
+    {% for field in form.visible_fields %}
+      <td>
+      {# Include the hidden fields in the form #}
+      {% if forloop.first %}
+        {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+        {% endfor %}
+      {% endif %}
+        {{ field.errors.as_ul }}
+        {{ field }}
+      </td>
+    {% endfor %}
+    </tr>
+  {% endfor %}
+</tbody>
 </table>

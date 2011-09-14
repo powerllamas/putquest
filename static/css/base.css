@@ -385,3 +385,8 @@ table.stats td.number {
 .answers .question li.chosen {
   color: #000000;
 }
+
+#formset tbody.ui-sortable td.handle {
+  padding-left: 20px;
+  background-color: #A39770;
+}

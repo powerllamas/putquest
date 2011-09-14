@@ -4,6 +4,10 @@
 {% load tabs %}
 {% load putquest_tags %}
 
+{% block scripts %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/answer_sequence.js"></script>
+{% endblock %}
+
 {% block content %}
 <div class="form_box quest_edit_base">
     <h3>{% block form_title %}{% endblock %}</h3>
