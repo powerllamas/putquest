@@ -196,6 +196,7 @@ button, input[type="submit"] {
 	border: 1px solid #2B2922;
 	background:-webkit-gradient(linear, left top, left bottom, from(#EFE4BD), to(#BAB293));
 	background:-moz-linear-gradient(top, #EFE4BD, #BAB293);
+	background:-o-linear-gradient(top, #EFE4BD, #BAB293);
 	padding: 5px;
 }
 
@@ -206,6 +207,7 @@ button:hover, input[type="submit"]:hover {
 button:active, button:focus, input[type="submit"]:active, input[type="submit"]:focus {
 	background:-webkit-gradient(linear, left bottom, left top, from(#EFE4BD), to(#BAB293));
 	background:-moz-linear-gradient(bottom, #EFE4BD, #BAB293);
+	background:-o-linear-gradient(bottom, #EFE4BD, #BAB293);
 }
 
 button:disabled, input[type="submit"]:disabled {

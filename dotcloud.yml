@@ -1,4 +1,4 @@
 www:
     type: python
 db:
-    type: sqlite3
+    type: sqlite
