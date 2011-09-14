@@ -1,10 +1,19 @@
 $(document).ready(function(){
-	var itemsContainer = $("#formset tbody");
 	$("#formset thead").children().prepend("<td></td>");
+	$("#formset thead").children().each(function() {
+		$(this).children().eq(2).hide();
+	});
+
+	var itemsContainer = $("#formset tbody");
 	itemsContainer.children().prepend("<td class='handle'></td>");
+	itemsContainer.children().each(function() {
+		$(this).children().eq(2).hide();
+	});
+
 	itemsContainer.sortable({
 		cursor: 'move',
 		axis: 'y',
+		handle: 'td.handle',
 		update: function(event, ui) {
 			itemsContainer.children().each(function(index) {
 				var answerContentInput = $(this).children().eq(1).children().eq(2);

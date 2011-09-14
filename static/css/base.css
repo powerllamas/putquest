@@ -390,3 +390,7 @@ table.stats td.number {
   padding-left: 20px;
   background-color: #A39770;
 }
+
+#formset tbody.ui-sortable input[type="text"] {
+  width: 300px;
+}
