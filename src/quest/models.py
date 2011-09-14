@@ -68,6 +68,7 @@ class QuestionChoice(models.Model):
     class Meta:
         verbose_name = u"wybór"
         verbose_name_plural = u"wybory"
+        ordering = ['order']
 
 class AnswerSet(models.Model):
     finished = models.BooleanField(verbose_name=u'zakończono')
