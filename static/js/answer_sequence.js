@@ -1,4 +1,6 @@
 $(document).ready(function(){
+
+	$("#formset").before("<p>Aby zmienić kolejność odpowiedzi, przeciągnij je używając uchwytu po lewej stronie. Nie zapomnij <b>zapisać</b> zmian.</p>");
 	$("#formset thead").children().prepend("<td></td>");
 	$("#formset thead").children().each(function() {
 		$(this).children().eq(2).hide();
